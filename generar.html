@@ -44,8 +44,8 @@
 
 <fieldset>
   <legend>Idioma</legend>
-  <label><input type="radio" name="idioma" value="es" checked> Español</label>
-  <label><input type="radio" name="idioma" value="en"> Inglés</label>
+  <label><input type="checkbox" name="idioma" value="es" checked> Español</label>
+  <label><input type="checkbox" name="idioma" value="en"> Inglés</label>
 </fieldset>
 
 <div class="fila">
@@ -148,13 +148,22 @@ $('ir').onclick = async () => {
   $('log').textContent = '';
 
   const lote = document.querySelector('input[name=lote]:checked').value;
-  const idioma = document.querySelector('input[name=idioma]:checked').value;
-  const lista = LOTES[lote]();
+  const idiomas = [...document.querySelectorAll('input[name=idioma]:checked')].map(c => c.value);
+  if (!idiomas.length) {
+    $('estado').textContent = 'Marca al menos un idioma.';
+    $('ir').disabled = false;
+    $('parar').disabled = true;
+    return;
+  }
+  // Cada capítulo se hace en todos los idiomas marcados.
+  const base = LOTES[lote]();
+  const lista = [];
+  for (const idioma of idiomas) for (const [l, c] of base) lista.push([l, c, idioma]);
 
   let hechos = 0, nuevos = 0, saltados = 0, fallos = 0;
   const t0 = Date.now();
 
-  for (const [libro, cap] of lista) {
+  for (const [libro, cap, idioma] of lista) {
     if (parar) { apunta('— detenido —'); break; }
 
     if (await yaExiste(libro, cap, idioma)) {
@@ -163,10 +172,10 @@ $('ir').onclick = async () => {
       try {
         const ms = await generar(libro, cap, idioma);
         nuevos++;
-        apunta(libro + ' ' + cap + ' · listo · ' + (ms / 1000).toFixed(1) + 's');
+        apunta(libro + ' ' + cap + ' [' + idioma + '] · listo · ' + (ms / 1000).toFixed(1) + 's');
       } catch (e) {
         fallos++;
-        apunta(libro + ' ' + cap + ' · FALLÓ · ' + e.message);
+        apunta(libro + ' ' + cap + ' [' + idioma + '] · FALLÓ · ' + e.message);
         await new Promise(r => setTimeout(r, 2500));
       }
     }
