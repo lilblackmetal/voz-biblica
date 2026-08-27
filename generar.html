@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voz Bíblica — Generar capítulos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f8f5ef; color: #14161d; padding: 28px 22px 60px; max-width: 680px; margin: 0 auto;
+    line-height: 1.55; }
+  h1 { font-size: 24px; letter-spacing: -0.015em; margin-bottom: 6px; }
+  p.sub { color: #6b7385; font-size: 14px; margin-bottom: 22px; }
+  fieldset { border: 1px solid #d3d8e2; border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; background: #fff; }
+  legend { font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: #6b7385; padding: 0 6px; }
+  label { display: flex; gap: 9px; align-items: center; font-size: 14.5px; padding: 5px 0; cursor: pointer; }
+  .fila { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  button { font: inherit; font-size: 14px; padding: 11px 20px; border-radius: 999px; cursor: pointer;
+    border: 1px solid transparent; background: #d94f0e; color: #fffaf5; font-weight: 600; }
+  button.gris { background: transparent; border-color: #cfd3e5; color: #14161d; font-weight: 500; }
+  button:disabled { opacity: .45; cursor: default; }
+  #barra { height: 6px; background: #e6e3db; border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+  #relleno { height: 100%; width: 0; background: #d94f0e; transition: width .2s; }
+  #estado { font-size: 14px; margin-bottom: 14px; }
+  #log { font-family: ui-monospace, monospace; font-size: 11.5px; line-height: 1.7; color: #4a5060;
+    background: #fff; border: 1px solid #e6e3db; border-radius: 10px; padding: 12px 14px;
+    max-height: 320px; overflow: auto; white-space: pre-wrap; }
+  .aviso { font-size: 13px; color: #6b7385; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<h1>Generar capítulos por adelantado</h1>
+<p class="sub">Cada capítulo se escribe y se narra una sola vez, y queda guardado para siempre. Después de esto, abrirlos es instantáneo para cualquier persona.</p>
+
+<fieldset>
+  <legend>Qué generar</legend>
+  <label><input type="radio" name="lote" value="populares" checked> Los más buscados (28 capítulos, ~$0.45 USD)</label>
+  <label><input type="radio" name="lote" value="evangelios"> Los cuatro Evangelios (89 capítulos, ~$1.40 USD)</label>
+  <label><input type="radio" name="lote" value="salmos"> Salmos completo (150 capítulos, ~$2.40 USD)</label>
+  <label><input type="radio" name="lote" value="nt"> Nuevo Testamento completo (260 capítulos, ~$4.10 USD)</label>
+  <label><input type="radio" name="lote" value="todo"> Toda la Biblia (1189 capítulos, ~$19 USD)</label>
+</fieldset>
+
+<fieldset>
+  <legend>Idioma</legend>
+  <label><input type="radio" name="idioma" value="es" checked> Español</label>
+  <label><input type="radio" name="idioma" value="en"> Inglés</label>
+</fieldset>
+
+<div class="fila">
+  <button id="ir">Empezar</button>
+  <button id="parar" class="gris" disabled>Detener</button>
+</div>
+
+<div id="barra"><div id="relleno"></div></div>
+<div id="estado">Listo para empezar.</div>
+<div id="log"></div>
+
+<p class="aviso">Deja esta pestaña abierta hasta que termine. Puedes cerrarla y volver después: lo ya generado no se repite ni se vuelve a cobrar.</p>
+
+<script>
+const FN = 'https://mkjahlxsjwnleapfbiez.supabase.co/functions/v1/narrar';
+const STORE = 'https://mkjahlxsjwnleapfbiez.supabase.co/storage/v1/object/public/audio/';
+
+// Libros con su número de capítulos, con el nombre en inglés que espera el servidor.
+const LIBROS = [
+  ['Genesis',50],['Exodus',40],['Leviticus',27],['Numbers',36],['Deuteronomy',34],
+  ['Joshua',24],['Judges',21],['Ruth',4],['1 Samuel',31],['2 Samuel',24],
+  ['1 Kings',22],['2 Kings',25],['1 Chronicles',29],['2 Chronicles',36],['Ezra',10],
+  ['Nehemiah',13],['Esther',10],['Job',42],['Psalms',150],['Proverbs',31],
+  ['Ecclesiastes',12],['Song of Solomon',8],['Isaiah',66],['Jeremiah',52],['Lamentations',5],
+  ['Ezekiel',48],['Daniel',12],['Hosea',14],['Joel',3],['Amos',9],
+  ['Obadiah',1],['Jonah',4],['Micah',7],['Nahum',3],['Habakkuk',3],
+  ['Zephaniah',3],['Haggai',2],['Zechariah',14],['Malachi',4],
+  ['Matthew',28],['Mark',16],['Luke',24],['John',21],['Acts',28],
+  ['Romans',16],['1 Corinthians',16],['2 Corinthians',13],['Galatians',6],['Ephesians',6],
+  ['Philippians',4],['Colossians',4],['1 Thessalonians',5],['2 Thessalonians',3],['1 Timothy',6],
+  ['2 Timothy',4],['Titus',3],['Philemon',1],['Hebrews',13],['James',5],
+  ['1 Peter',5],['2 Peter',3],['1 John',5],['2 John',1],['3 John',1],
+  ['Jude',1],['Revelation',22],
+];
+const NT = LIBROS.slice(39);
+
+const POPULARES = [
+  ['Psalms',23],['Psalms',91],['Psalms',1],['Psalms',27],['Psalms',46],['Psalms',121],['Psalms',139],
+  ['John',3],['John',14],['John',1],['John',15],
+  ['Matthew',5],['Matthew',6],['Matthew',7],['Matthew',11],
+  ['Genesis',1],['Genesis',2],['Genesis',3],
+  ['Proverbs',3],['Proverbs',31],
+  ['Romans',8],['Romans',12],
+  ['Philippians',4],['1 Corinthians',13],['Isaiah',41],['Isaiah',53],
+  ['Ephesians',6],['James',1],
+];
+
+const expandir = (libros) => {
+  const out = [];
+  for (const [n, caps] of libros) for (let c = 1; c <= caps; c++) out.push([n, c]);
+  return out;
+};
+
+const LOTES = {
+  populares: () => POPULARES,
+  evangelios: () => expandir(LIBROS.slice(39, 43)),
+  salmos: () => expandir([['Psalms',150]]),
+  nt: () => expandir(NT),
+  todo: () => expandir(LIBROS),
+};
+
+const $ = (id) => document.getElementById(id);
+const limpio = (s) => s.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+let parar = false;
+
+function apunta(t) {
+  $('log').textContent = t + '\n' + $('log').textContent;
+}
+
+async function yaExiste(libro, cap, idioma) {
+  const u = STORE + idioma + '/' + limpio(libro) + '-' + cap + '.json';
+  try { const r = await fetch(u, { method: 'HEAD', cache: 'no-store' }); return r.ok; }
+  catch (e) { return false; }
+}
+
+async function generar(libro, cap, idioma) {
+  const t0 = Date.now();
+  const r = await fetch(FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ tipo: 'capitulo', libro, capitulo: cap, idioma }),
+  });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok || !d.text) throw new Error(r.status + ' ' + JSON.stringify(d).slice(0, 80));
+
+  // El audio se pide aparte, con el texto que acabamos de recibir.
+  await fetch(FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ tipo: 'audio', libro, capitulo: cap, idioma, texto: d.text }),
+  }).catch(() => {});
+
+  return Date.now() - t0;
+}
+
+$('ir').onclick = async () => {
+  parar = false;
+  $('ir').disabled = true;
+  $('parar').disabled = false;
+  $('log').textContent = '';
+
+  const lote = document.querySelector('input[name=lote]:checked').value;
+  const idioma = document.querySelector('input[name=idioma]:checked').value;
+  const lista = LOTES[lote]();
+
+  let hechos = 0, nuevos = 0, saltados = 0, fallos = 0;
+  const t0 = Date.now();
+
+  for (const [libro, cap] of lista) {
+    if (parar) { apunta('— detenido —'); break; }
+
+    if (await yaExiste(libro, cap, idioma)) {
+      saltados++;
+    } else {
+      try {
+        const ms = await generar(libro, cap, idioma);
+        nuevos++;
+        apunta(libro + ' ' + cap + ' · listo · ' + (ms / 1000).toFixed(1) + 's');
+      } catch (e) {
+        fallos++;
+        apunta(libro + ' ' + cap + ' · FALLÓ · ' + e.message);
+        await new Promise(r => setTimeout(r, 2500));
+      }
+    }
+
+    hechos++;
+    const pct = (hechos / lista.length) * 100;
+    $('relleno').style.width = pct + '%';
+    const min = (Date.now() - t0) / 60000;
+    const faltan = nuevos ? Math.round(((lista.length - hechos) / (nuevos / min || 1))) : 0;
+    $('estado').textContent = hechos + ' de ' + lista.length +
+      ' · nuevos ' + nuevos + ' · ya estaban ' + saltados + ' · fallos ' + fallos +
+      (faltan && nuevos > 2 ? ' · faltan ~' + faltan + ' min' : '');
+  }
+
+  $('estado').textContent = 'Terminado. Nuevos ' + nuevos + ', ya estaban ' + saltados + ', fallos ' + fallos + '.';
+  $('ir').disabled = false;
+  $('parar').disabled = true;
+};
+
+$('parar').onclick = () => { parar = true; $('parar').disabled = true; };
+</script>
+
+</body>
+</html>
