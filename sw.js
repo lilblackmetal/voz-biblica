@@ -2,7 +2,7 @@
 // La página se muestra desde la copia guardada al instante y se actualiza por
 // detrás; la siguiente vez que abras ya tienes la versión nueva. Así la app
 // abre rápido incluso con internet lento.
-const CACHE = 'vozbiblica-v4';
+const CACHE = 'vozbiblica-v5';
 
 self.addEventListener('install', () => self.skipWaiting());
 
