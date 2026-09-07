@@ -7,7 +7,7 @@
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
-  :root { --tinta:#101728; --azul:#2563eb; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
+  :root { --tinta:#101728; --azul:#101728; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
   * { box-sizing:border-box; }
   body { margin:0; background:#ffffff; color:var(--tinta); font-family:'Figtree',system-ui,sans-serif; }
   .caja { max-width:620px; margin:0 auto; padding:48px 24px 64px; }
@@ -17,10 +17,10 @@
   label { display:block; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--gris); margin:0 0 7px; }
   input, textarea, select { width:100%; padding:13px 14px; font:inherit; font-size:15px; color:var(--tinta); background:#fff; border:1px solid var(--linea); border-radius:12px; }
   textarea { min-height:130px; resize:vertical; line-height:1.55; }
-  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--azul); box-shadow:0 0 0 3px rgba(37,99,235,0.14); }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--azul); box-shadow:0 0 0 3px rgba(16,23,40,0.14); }
   .campo { margin-bottom:16px; }
   button { width:100%; min-height:50px; padding:14px; font:inherit; font-size:15.5px; font-weight:700; color:#fff; background:var(--azul); border:none; border-radius:12px; cursor:pointer; }
-  button:hover { background:#1d4ed8; }
+  button:hover { background:#2a2f3d; }
   .directo { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:12px; }
   .via { display:flex; align-items:flex-start; gap:12px; padding:18px; border:1px solid var(--linea); border-radius:14px; text-decoration:none; color:inherit; }
   .via:hover { border-color:var(--tinta); }
@@ -36,18 +36,20 @@
   .faq p { font-size:14.5px; line-height:1.65; margin:0 0 18px; color:var(--gris); max-width:58ch; }
   .pie { margin-top:38px; padding-top:22px; border-top:1px solid var(--linea); text-align:center; font-size:13.5px; color:var(--gris); }
   a.liga { color:var(--azul); text-decoration:none; font-weight:600; }
-  a.liga:hover { color:#1d4ed8; }
-</style>
+  a.liga:hover { color:#2a2f3d; }
+  <style>.vb-navlink{}
+    @media (max-width: 900px) { .vb-navlink { display: none; } }</style>
 </head>
 <body>
-  <header style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;max-width:1200px;margin:0 auto;padding:26px clamp(20px,5vw,72px) 12px;box-sizing:border-box;">
+  <header style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;max-width:1200px;margin:0 auto;padding:26px clamp(20px,5vw,72px) 12px;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif;">
     <a href="index.html" style="display:flex;grid-column:1;grid-row:1;justify-self:start;"><img src="logo-app.png" alt="Voz Bíblica" style="display:block;width:clamp(170px,30vw,260px);height:auto;" /></a>
-    <nav style="grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:flex-end;gap:2px;flex-wrap:wrap;">
-      <a href="contenido.html" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Nuestro contenido</a>
-      <a href="acerca.html" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Acerca de</a>
-      <a href="precios.html" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Precios</a>
-      <a href="contacto.html" style="font-size:14px;padding:8px 10px;font-weight:600;color:#101728;border-bottom:2px solid #101728;text-decoration:none;">Contacto</a>
-      <a href="entrar.html" style="font-size:14px;padding:9px 14px;margin-left:6px;border:1px solid rgba(16,23,40,0.16);border-radius:12px;color:#101728;text-decoration:none;">Iniciar sesión</a>
+    <nav style="grid-column:2;grid-row:1;display:flex;align-items:center;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+      <a href="contenido.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Nuestro contenido</a>
+      <a href="acerca.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Acerca de</a>
+      <a href="precios.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Precios</a>
+      <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#101728;border-bottom:2px solid #101728;text-decoration:none;">Contacto</a>
+      <a href="app.html#entrar" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Iniciar sesión</a>
+      <a href="app.html#crear" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Crear cuenta</a>
     </nav>
   </header>
 
@@ -115,7 +117,7 @@
     </details>
     <details>
       <summary>¿Puedo pagar en efectivo?</summary>
-      <p>Sí, en OXXO. Al pagar elige esa opción y te damos la referencia.</p>
+      <p>Por ahora el pago es solo con tarjeta, de forma segura a través de Stripe.</p>
     </details>
     <details>
       <summary>¿Funciona sin internet?</summary>
@@ -161,10 +163,9 @@
         <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Empezar</div>
           <a href="precios.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Precios</a>
-          <a href="app.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Crear cuenta</a>
-          <a href="entrar.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Iniciar sesión</a>
-          <a href="app.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Escuchar Génesis y Juan</a>
-          <a href="app.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Instalar la app</a>
+          <a href="app.html#crear" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Crear cuenta</a>
+          <a href="app.html#entrar" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Iniciar sesión</a>
+          <a href="app.html#crear" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Escuchar Génesis y Juan</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Ayuda</div>
