@@ -1,8 +1,9 @@
 // Voz Bíblica — guardado offline.
-// La página se muestra desde la copia guardada al instante y se actualiza por
-// detrás; la siguiente vez que abras ya tienes la versión nueva. Así la app
-// abre rápido incluso con internet lento.
-const CACHE = 'vozbiblica-v5';
+// Las páginas Y el código (support.js, estilos) se piden siempre a la red, con
+// la copia guardada como respaldo si no hay internet: así una versión nueva se
+// ve en la primera recarga. Sólo las imágenes van desde la copia guardada, que
+// es lo que hace que la app abra rápido.
+const CACHE = 'vozbiblica-v9';
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -21,28 +22,26 @@ self.addEventListener('fetch', e => {
   if (url.origin !== self.location.origin) return;
 
   const esPagina = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
-  const clave = esPagina ? './' : req;
-
-  // Si trae ?v= es porque queremos forzar la versión nueva: primero la red.
-  const forzar = esPagina && url.search.includes('v=');
+  const esCodigo = /\.(js|css|json)$/i.test(url.pathname);
 
   const desdeRed = () => fetch(req).then(r => {
     if (r && r.status === 200) {
       const copia = r.clone();
-      caches.open(CACHE).then(c => c.put(clave, copia)).catch(() => {});
+      caches.open(CACHE).then(c => c.put(req, copia)).catch(() => {});
     }
     return r;
   });
 
-  if (forzar) {
-    e.respondWith(desdeRed().catch(() => caches.match(clave)));
+  // Páginas y código: red primero, copia guardada solo si falla la red.
+  if (esPagina || esCodigo) {
+    e.respondWith(desdeRed().catch(() => caches.match(req)));
     return;
   }
 
+  // Imágenes: copia guardada primero, y se refresca por detrás.
   e.respondWith(
-    caches.match(clave).then(guardado => {
+    caches.match(req).then(guardado => {
       if (guardado) {
-        // Se actualiza sin hacer esperar a nadie.
         desdeRed().catch(() => {});
         return guardado;
       }
