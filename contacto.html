@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacto — Voz Bíblica</title>
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+  :root { --tinta:#101728; --azul:#2563eb; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#ffffff; color:var(--tinta); font-family:'Figtree',system-ui,sans-serif; }
+  .caja { max-width:620px; margin:0 auto; padding:48px 24px 64px; }
+  h1 { font-size:clamp(28px,5vw,38px); font-weight:800; letter-spacing:-0.03em; line-height:1.06; margin:0 0 8px; }
+  .sub { font-size:15.5px; line-height:1.6; color:var(--gris); margin:0 0 32px; }
+  h2 { font-size:13px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:var(--gris); margin:34px 0 14px; }
+  label { display:block; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--gris); margin:0 0 7px; }
+  input, textarea, select { width:100%; padding:13px 14px; font:inherit; font-size:15px; color:var(--tinta); background:#fff; border:1px solid var(--linea); border-radius:12px; }
+  textarea { min-height:130px; resize:vertical; line-height:1.55; }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--azul); box-shadow:0 0 0 3px rgba(37,99,235,0.14); }
+  .campo { margin-bottom:16px; }
+  button { width:100%; min-height:50px; padding:14px; font:inherit; font-size:15.5px; font-weight:700; color:#fff; background:var(--azul); border:none; border-radius:12px; cursor:pointer; }
+  button:hover { background:#1d4ed8; }
+  .directo { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:12px; }
+  .via { display:flex; align-items:flex-start; gap:12px; padding:18px; border:1px solid var(--linea); border-radius:14px; text-decoration:none; color:inherit; }
+  .via:hover { border-color:var(--tinta); }
+  .via svg { flex:none; margin-top:2px; color:var(--azul); }
+  .via .t { font-size:14.5px; font-weight:700; margin-bottom:3px; }
+  .via .d { font-size:13px; line-height:1.5; color:var(--gris); }
+  .faq { border-top:1px solid var(--linea); }
+  .faq details { border-bottom:1px solid var(--linea); }
+  .faq summary { list-style:none; cursor:pointer; padding:16px 2px; font-size:15px; font-weight:600; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:'+'; color:var(--azul); font-size:19px; font-weight:700; flex:none; }
+  .faq details[open] summary::after { content:'–'; }
+  .faq p { font-size:14.5px; line-height:1.65; margin:0 0 18px; color:var(--gris); max-width:58ch; }
+  .pie { margin-top:38px; padding-top:22px; border-top:1px solid var(--linea); text-align:center; font-size:13.5px; color:var(--gris); }
+  a.liga { color:var(--azul); text-decoration:none; font-weight:600; }
+  a.liga:hover { color:#1d4ed8; }
+</style>
+</head>
+<body>
+  <header style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;max-width:1200px;margin:0 auto;padding:26px clamp(20px,5vw,72px) 12px;box-sizing:border-box;">
+    <a href="index.html" style="display:flex;grid-column:1;grid-row:1;justify-self:start;"><img src="logo-app.png" alt="Voz Bíblica" style="display:block;width:clamp(170px,30vw,260px);height:auto;" /></a>
+    <nav style="grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:flex-end;gap:2px;flex-wrap:wrap;">
+      <a href="contenido.html" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Nuestro contenido</a>
+      <a href="acerca.html" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Acerca de</a>
+      <a href="precios.html" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Precios</a>
+      <a href="contacto.html" style="font-size:14px;padding:8px 10px;font-weight:600;color:#101728;border-bottom:2px solid #101728;text-decoration:none;">Contacto</a>
+      <a href="entrar.html" style="font-size:14px;padding:9px 14px;margin-left:6px;border:1px solid rgba(16,23,40,0.16);border-radius:12px;color:#101728;text-decoration:none;">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <div class="caja" style="padding-top:12px;">
+  <h1>Contacto</h1>
+  <p class="sub">Escríbenos por lo que sea: un problema con el audio, una duda del pago, o una idea para la app. Contestamos en menos de 24 horas.</p>
+
+  <div class="directo">
+    <a class="via" href="mailto:contacto@vozbiblica.com">
+      <svg width="19" height="19" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85L122.55,149a8,8,0,0,0,10.9,0l12-11.15L203.43,192H52.57Zm46.74-10.85L216,74.19V181.81Z"></path></svg>
+      <span>
+        <span class="t">Correo</span>
+        <span class="d">contacto@vozbiblica.com</span>
+      </span>
+    </a>
+    <a class="via" href="https://wa.me/" target="_blank" rel="noopener">
+      <svg width="19" height="19" viewBox="0 0 256 256" fill="currentColor"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84Z"></path></svg>
+      <span>
+        <span class="t">WhatsApp</span>
+        <span class="d">Para dudas rápidas</span>
+      </span>
+    </a>
+  </div>
+
+  <h2>Mándanos un mensaje</h2>
+  <form action="mailto:contacto@vozbiblica.com" method="post" enctype="text/plain">
+    <div class="campo">
+      <label for="nombre">Tu nombre</label>
+      <input id="nombre" name="nombre" type="text" placeholder="Como te llamas" required>
+    </div>
+    <div class="campo">
+      <label for="correo">Tu correo</label>
+      <input id="correo" name="correo" type="email" placeholder="correo@ejemplo.com" required>
+    </div>
+    <div class="campo">
+      <label for="tema">De qué se trata</label>
+      <select id="tema" name="tema">
+        <option>No me carga el audio o el texto</option>
+        <option>Duda sobre el pago o mi membresía</option>
+        <option>No puedo entrar a mi cuenta</option>
+        <option>Una idea para la app</option>
+        <option>Otra cosa</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="mensaje">Tu mensaje</label>
+      <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué pasó, en qué libro y capítulo, y con qué aparato lo estás usando." required></textarea>
+    </div>
+    <button type="submit">Enviar mensaje</button>
+  </form>
+
+  <h2>Antes de escribir</h2>
+  <div class="faq">
+    <details>
+      <summary>No me carga el audio de un capítulo</summary>
+      <p>Recarga la página y ábrelo de nuevo. Si sigue igual, dinos qué libro y capítulo era y lo revisamos ese mismo día.</p>
+    </details>
+    <details>
+      <summary>Pagué y la app no me deja entrar</summary>
+      <p>Entra con el mismo correo que usaste en el pago. Si aun así no abre, escríbenos con ese correo y lo activamos a mano.</p>
+    </details>
+    <details>
+      <summary>¿Cómo cancelo mi membresía?</summary>
+      <p>Escríbenos y la cancelamos de inmediato, sin preguntas. La membresía del mes no se vuelve a cobrar.</p>
+    </details>
+    <details>
+      <summary>¿Puedo pagar en efectivo?</summary>
+      <p>Sí, en OXXO. Al pagar elige esa opción y te damos la referencia.</p>
+    </details>
+    <details>
+      <summary>¿Funciona sin internet?</summary>
+      <p>Sí. Una vez que abres un capítulo queda guardado en tu aparato y lo escuchas sin señal.</p>
+    </details>
+  </div>
+
+  </div>
+
+  <footer style="background:#0b0f1a;color:#ffffff;margin-top:56px;">
+    <div style="max-width:1200px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(20px,5vw,72px) 0;box-sizing:border-box;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:clamp(30px,4vw,48px);padding-bottom:clamp(36px,5vw,56px);">
+        <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
+          <a href="index.html" style="display:flex;align-items:center;gap:11px;text-decoration:none;">
+            <img src="logo-icono.png" alt="" style="display:block;width:42px;height:42px;border-radius:10px;flex:none;" />
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+              <span style="font-family:Figtree,sans-serif;font-weight:500;font-size:19px;letter-spacing:-0.012em;color:#ffffff;white-space:nowrap;">Voz Bíblica</span>
+              <span style="font-size:9.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.52);white-space:nowrap;">En lenguaje sencillo</span>
+            </span>
+          </a>
+          <p style="font-size:14px;line-height:1.6;margin:0;max-width:30ch;color:rgba(255,255,255,0.66);">La Biblia entretenida al escuchar, fácil de aprender y poderosa para vivir.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="display:inline-flex;align-items:center;padding:5px 11px;border-radius:100px;border:1px solid rgba(255,255,255,0.22);font-size:11.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);">Español</span>
+            <span style="display:inline-flex;align-items:center;padding:5px 11px;border-radius:100px;border:1px solid rgba(255,255,255,0.22);font-size:11.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);">English</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Contenido</div>
+          <a href="contenido.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Nuestro contenido</a>
+          <a href="contenido.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Guías de libros</a>
+          <a href="contenido.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Historias completas</a>
+          <a href="contenido.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Oraciones guiadas</a>
+          <a href="contenido.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Personajes y lugares</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Voz Bíblica</div>
+          <a href="acerca.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Acerca de</a>
+          <a href="acerca.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Nuestra misión</a>
+          <a href="acerca.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Principios de escritura</a>
+          <a href="acerca.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Qué hay detrás</a>
+          <a href="contenido.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Cómo nos comparamos</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Empezar</div>
+          <a href="precios.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Precios</a>
+          <a href="app.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Crear cuenta</a>
+          <a href="entrar.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Iniciar sesión</a>
+          <a href="app.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Escuchar Génesis y Juan</a>
+          <a href="app.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Instalar la app</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Ayuda</div>
+          <a href="contacto.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Contacto</a>
+          <a href="precios.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Preguntas sobre el pago</a>
+          <a href="contacto.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Cancelar membresía</a>
+          <a href="contacto.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Reportar un problema</a>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:space-between;align-items:center;padding:22px 0 40px;border-top:1px solid rgba(255,255,255,0.13);">
+        <div style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.5);max-width:60ch;">Basada en la Reina Valera 1909, contada en lenguaje de hoy. © 2026 Voz Bíblica.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 20px;font-size:13px;">
+          <a href="mailto:contacto@vozbiblica.com" style="color:rgba(255,255,255,0.5);text-decoration:none;">contacto@vozbiblica.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
