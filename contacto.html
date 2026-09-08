@@ -7,7 +7,7 @@
 <link rel="icon" href="logo-icono.png?v=7">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
-  :root { --tinta:#101728; --azul:#101728; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
+  :root { --tinta:#101728; --azul:#2563eb; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
   * { box-sizing:border-box; }
   body { margin:0; background:#ffffff; color:var(--tinta); font-family:'Figtree',system-ui,sans-serif; }
   .caja { max-width:620px; margin:0 auto; padding:48px 24px 64px; }
@@ -19,7 +19,7 @@
   textarea { min-height:130px; resize:vertical; line-height:1.55; }
   input:focus, textarea:focus, select:focus { outline:none; border-color:var(--azul); box-shadow:0 0 0 3px rgba(16,23,40,0.14); }
   .campo { margin-bottom:16px; }
-  button { width:100%; min-height:50px; padding:14px; font:inherit; font-size:15.5px; font-weight:700; color:#fff; background:var(--azul); border:none; border-radius:12px; cursor:pointer; }
+  button { width:100%; min-height:50px; padding:14px; font:inherit; font-size:15.5px; font-weight:700; color:#fff; background:var(--azul); border:none; border-radius:100px; cursor:pointer; }
   button:hover { background:#2a2f3d; }
   .directo { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:12px; }
   .via { display:flex; align-items:flex-start; gap:12px; padding:18px; border:1px solid var(--linea); border-radius:14px; text-decoration:none; color:inherit; }
@@ -38,6 +38,7 @@
   a.liga { color:var(--azul); text-decoration:none; font-weight:600; }
   a.liga:hover { color:#2a2f3d; }
   <style>.vb-navlink{}
+    .vb-navlink:hover, .vb-navlink:active { color: #2563eb !important; }
     @media (max-width: 900px) { .vb-navlink { display: none; } }</style>
 </head>
 <body>
@@ -47,9 +48,9 @@
       <a href="contenido.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Nuestro contenido</a>
       <a href="acerca.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Acerca de</a>
       <a href="precios.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Precios</a>
-      <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#101728;border-bottom:2px solid #101728;text-decoration:none;">Contacto</a>
-      <a href="app.html#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#101728;border:1.5px solid #101728;border-radius:8px;color:#ffffff;text-decoration:none;">Iniciar sesión</a>
-      <a href="app.html#crear" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ffffff;border:1.5px solid #101728;border-radius:8px;color:#101728;text-decoration:none;">Crear cuenta</a>
+      <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#2563eb;text-decoration:none;">Contacto</a>
+      <a href="app.html#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#101728;border:1.5px solid #101728;border-radius:100px;color:#ffffff;text-decoration:none;">Iniciar sesión</a>
+      <a href="app.html#crear" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ffffff;border:1px solid #cfd3dd;border-radius:100px;color:#101728;text-decoration:none;">Crear cuenta</a>
     </nav>
   </header>
 
