@@ -31,8 +31,10 @@
   .faq details { border-bottom:1px solid var(--linea); }
   .faq summary { list-style:none; cursor:pointer; padding:16px 2px; font-size:15px; font-weight:600; display:flex; align-items:center; justify-content:space-between; gap:14px; }
   .faq summary::-webkit-details-marker { display:none; }
-  .faq summary::after { content:'+'; color:var(--azul); font-size:19px; font-weight:700; flex:none; }
-  .faq details[open] summary::after { content:'–'; }
+  .faq summary::after { content:''; flex:none; width:20px; height:20px; opacity:0.55; transition:transform 0.2s ease;
+    background:currentColor; -webkit-mask:no-repeat center/20px url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M208,96l-80,80L48,96' fill='none' stroke='%23000' stroke-width='20' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask:no-repeat center/20px url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M208,96l-80,80L48,96' fill='none' stroke='%23000' stroke-width='20' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .faq details[open] summary::after { transform:rotate(180deg); }
   .faq p { font-size:14.5px; line-height:1.65; margin:0 0 18px; color:var(--gris); max-width:58ch; }
   .pie { margin-top:38px; padding-top:22px; border-top:1px solid var(--linea); text-align:center; font-size:13.5px; color:var(--gris); }
   a.liga { color:var(--azul); text-decoration:none; font-weight:600; }
@@ -101,7 +103,7 @@
     <button type="submit">Enviar mensaje</button>
   </form>
 
-  <h2>Antes de escribir</h2>
+  <h2>Preguntas</h2>
   <div class="faq">
     <details>
       <summary>No me carga el audio de un capítulo</summary>
