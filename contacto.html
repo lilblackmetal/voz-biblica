@@ -4,11 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contacto — Voz Bíblica</title>
-<link rel="icon" type="image/png" sizes="512x512" href="favicon-app.png?v=11">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=11">
-<link rel="shortcut icon" href="favicon.ico?v=11">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=11">
-<link rel="manifest" href="manifest.json">
+<link rel="alternate" hreflang="es" href="https://vozbiblica.com/contacto.html">
+<link rel="alternate" hreflang="en" href="https://vozbiblica.com/contacto-en.html">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
   :root { --tinta:#101728; --azul:#2563eb; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
@@ -51,13 +48,17 @@
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
   .vb-navlink:hover, .vb-navlink:active { color: #fd3852 !important; }
-  header nav a[href="app.html#entrar"] { transition: background 0.14s ease, border-color 0.14s ease; }
-  header nav a[href="app.html#entrar"]:hover { background: #e42b44 !important; border-color: #e42b44 !important; }
-  header nav a[href="app.html#entrar"]:active { background: #cc2039 !important; border-color: #cc2039 !important; }
-  header nav a[href="app.html#crear"] { transition: color 0.14s ease, border-color 0.14s ease; }
-  header nav a[href="app.html#crear"]:hover { color: #fd3852 !important; border-color: #fd3852 !important; }
-  header nav a[href="app.html#crear"]:active { background: #fd3852 !important; border-color: #fd3852 !important; color: #fff !important; }
+  header nav a[href="app.html?lang=es#entrar"] { transition: background 0.14s ease, border-color 0.14s ease; }
+  header nav a[href="app.html?lang=es#entrar"]:hover { background: #e42b44 !important; border-color: #e42b44 !important; }
+  header nav a[href="app.html?lang=es#entrar"]:active { background: #cc2039 !important; border-color: #cc2039 !important; }
+  header nav a[href="app.html?lang=es#crear"] { transition: color 0.14s ease, border-color 0.14s ease; }
+  header nav a[href="app.html?lang=es#crear"]:hover { color: #fd3852 !important; border-color: #fd3852 !important; }
+  header nav a[href="app.html?lang=es#crear"]:active { background: #fd3852 !important; border-color: #fd3852 !important; color: #fff !important; }
 </style>
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=13">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=13">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=13">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <header style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;max-width:1200px;margin:0 auto;padding:26px clamp(20px,5vw,72px) 12px;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif;">
@@ -68,8 +69,8 @@
       <a href="acerca.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Acerca de</a>
       <a href="precios.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Precios</a>
       <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#fd3852;text-decoration:none;">Contacto</a>
-      <a href="app.html#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#fd3852;border:1.5px solid #fd3852;border-radius:12px;color:#ffffff;text-decoration:none;">Iniciar sesión</a>
-      <a href="app.html#crear" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ffffff;border:1px solid #cfd3dd;border-radius:12px;color:#101728;text-decoration:none;">Crear cuenta</a>
+      <a href="app.html?lang=es#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#fd3852;border:1.5px solid #fd3852;border-radius:12px;color:#ffffff;text-decoration:none;">Iniciar sesión</a>
+      <a href="app.html?lang=es#crear" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ffffff;border:1px solid #cfd3dd;border-radius:12px;color:#101728;text-decoration:none;">Crear cuenta</a>
     </nav>
   </header>
 
@@ -156,8 +157,8 @@
           </a>
           <p style="font-size:14px;line-height:1.6;margin:0;max-width:30ch;color:rgba(255,255,255,0.66);">La Biblia entretenida al escuchar, fácil de aprender y poderosa para vivir.</p>
           <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            <span style="display:inline-flex;align-items:center;padding:5px 11px;border-radius:9px;border:1px solid rgba(255,255,255,0.22);font-size:11.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);">Español</span>
-            <span style="display:inline-flex;align-items:center;padding:5px 11px;border-radius:9px;border:1px solid rgba(255,255,255,0.22);font-size:11.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);">English</span>
+            <a href="contacto.html" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;background:#fd3852;border:1px solid #fd3852;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#ffffff;text-decoration:none;">Español</a>
+            <a href="contacto-en.html" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.28);font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-decoration:none;">English</a>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
@@ -179,9 +180,9 @@
         <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Empezar</div>
           <a href="precios.html" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Precios</a>
-          <a href="app.html#crear" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Crear cuenta</a>
-          <a href="app.html#entrar" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Iniciar sesión</a>
-          <a href="app.html#crear" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Ver la biblioteca</a>
+          <a href="app.html?lang=es#crear" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Crear cuenta</a>
+          <a href="app.html?lang=es#entrar" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Iniciar sesión</a>
+          <a href="app.html?lang=es#crear" style="font-size:14px;line-height:1.5;color:rgba(255,255,255,0.66);text-decoration:none;">Ver la biblioteca</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.44);margin-bottom:3px;">Ayuda</div>
