@@ -55,12 +55,19 @@
   header nav a[href="app.html?lang=en#crear"]:hover { color: #fd3852 !important; border-color: #fd3852 !important; }
   header nav a[href="app.html?lang=en#crear"]:active { background: #fd3852 !important; border-color: #fd3852 !important; color: #fff !important; }
 </style>
+
+<style id="vb-menu-movil">
+  .vb-chk { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .vb-burger { display: none; }
+  .vb-mmenu { display: none; }
+  @media (max-width: 900px) {
+    .vb-burger { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: 6px; cursor: pointer; color: var(--color-text); flex: none; }
+    .vb-chk:checked ~ .vb-mmenu { display: flex; }
+  }
+</style>
+  <link rel="icon" href="vozbiblica-icon.png?1">
+  <link rel="apple-touch-icon" sizes="180x180" href="vozbiblica-icon-180.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" sizes="16x16" href="vb-tab-16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="vb-tab-32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="vb-tab-48.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="vb-tab-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=25">
 </head>
 <body>
   <header style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;max-width:1200px;margin:0 auto;padding:26px clamp(20px,5vw,72px) 12px;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif;">
@@ -73,6 +80,20 @@
       <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#fd3852;text-decoration:none;">Contact</a>
       <a href="app.html?lang=en#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#fd3852;border:1.5px solid #fd3852;border-radius:12px;color:#ffffff;text-decoration:none;">Sign in</a>
       <a href="app.html?lang=en#crear" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ffffff;border:1px solid #cfd3dd;border-radius:12px;color:#101728;text-decoration:none;">Create account</a>
+      <input type="checkbox" id="vbm-contact" class="vb-chk">
+      <label for="vbm-contact" class="vb-burger" aria-label="Menú"><svg width="26" height="26" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg></label>
+      <div class="vb-mmenu" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:80;flex-direction:column;background:var(--color-bg);padding:18px 22px 28px;box-sizing:border-box;overflow-y:auto;">
+        <label for="vbm-contact" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin:0 -8px 10px auto;cursor:pointer;color:var(--color-text);"><svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></label>
+        <a href="index-en.html" style="display:flex;align-items:center;min-height:52px;padding:0 4px;font-size:19px;font-weight:600;color:var(--color-text);text-decoration:none;border-bottom:1px solid var(--color-divider);">Home</a>
+        <a href="contenido-en.html" style="display:flex;align-items:center;min-height:52px;padding:0 4px;font-size:19px;font-weight:600;color:var(--color-text);text-decoration:none;border-bottom:1px solid var(--color-divider);">Our content</a>
+        <a href="acerca-en.html" style="display:flex;align-items:center;min-height:52px;padding:0 4px;font-size:19px;font-weight:600;color:var(--color-text);text-decoration:none;border-bottom:1px solid var(--color-divider);">About</a>
+        <a href="precios-en.html" style="display:flex;align-items:center;min-height:52px;padding:0 4px;font-size:19px;font-weight:600;color:var(--color-text);text-decoration:none;border-bottom:1px solid var(--color-divider);">Pricing</a>
+        <a href="contacto-en.html" style="display:flex;align-items:center;min-height:52px;padding:0 4px;font-size:19px;font-weight:600;color:var(--color-text);text-decoration:none;border-bottom:1px solid var(--color-divider);">Contact</a>
+        <span style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
+        <a href="app.html?lang=en#entrar" style="display:flex;align-items:center;justify-content:center;min-height:52px;font-size:16px;font-weight:600;border-radius:12px;text-decoration:none;background:#fd3852;border:1.5px solid #fd3852;color:#ffffff;">Sign in</a>
+        <a href="app.html?lang=en#crear" style="display:flex;align-items:center;justify-content:center;min-height:52px;font-size:16px;font-weight:600;border-radius:12px;text-decoration:none;background:transparent;border:1px solid #cfd3dd;color:var(--color-text);">Create account</a>
+        </span>
+      </div>
     </nav>
   </header>
 
