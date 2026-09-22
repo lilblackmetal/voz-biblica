@@ -8,7 +8,7 @@
 <link rel="alternate" hreflang="en" href="https://vozbiblica.com/contacto-en.html">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
-  :root { --tinta:#101728; --azul:#2563eb; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
+  :root { --tinta:#101728; --azul:#02abda; --gris:#5a6480; --linea:rgba(16,23,40,0.14); }
   * { box-sizing:border-box; }
   body { margin:0; background:#ffffff; color:var(--tinta); font-family:'Figtree',system-ui,sans-serif; }
   .caja { max-width:620px; margin:0 auto; padding:48px 24px 64px; }
@@ -83,7 +83,7 @@
   html.vb-noche body { background:#000000; color:#e9ecf2; }
   .vb-tema-esc { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; margin-left:4px;
     border:0; border-radius:10px; background:transparent; color:var(--tinta); cursor:pointer; flex:none; }
-  .vb-tema-esc:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
+  .vb-tema-esc:focus-visible { outline:2px solid #02abda; outline-offset:2px; }
   .vb-tema-esc [data-vb-icono="noche"] { display:none; }
   html.vb-noche .vb-tema-esc [data-vb-icono="dia"] { display:none; }
   html.vb-noche .vb-tema-esc [data-vb-icono="noche"] { display:inline-flex; }
@@ -105,7 +105,7 @@
     border-radius:10px; border:1px solid var(--linea); background:transparent;
     font-family:inherit; font-size:14px; font-weight:600; color:var(--tinta); cursor:pointer; }
   .vb-conmuta:hover { border-color:var(--gris); }
-  .vb-conmuta:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
+  .vb-conmuta:focus-visible { outline:2px solid #02abda; outline-offset:2px; }
 </style>
 <script>
   (function () {
@@ -121,15 +121,15 @@
       var b = document.querySelectorAll('[data-vb-modo]');
       for (var i = 0; i < b.length; i++) {
         var activo = (b[i].getAttribute('data-vb-modo') === 'noche') === noche;
-        b[i].style.background = activo ? '#2563eb' : 'transparent';
-        b[i].style.borderColor = activo ? '#2563eb' : 'var(--linea)';
+        b[i].style.background = activo ? '#02abda' : 'transparent';
+        b[i].style.borderColor = activo ? '#02abda' : 'var(--linea)';
         b[i].style.color = activo ? '#ffffff' : 'var(--tinta)';
       }
       var p = document.querySelectorAll('[data-vb-pie]');
       for (var k = 0; k < p.length; k++) {
         var act = (p[k].getAttribute('data-vb-pie') === 'noche') === noche;
-        p[k].style.background = act ? '#2563eb' : 'transparent';
-        p[k].style.borderColor = act ? '#2563eb' : 'rgba(255,255,255,0.28)';
+        p[k].style.background = act ? '#02abda' : 'transparent';
+        p[k].style.borderColor = act ? '#02abda' : 'rgba(255,255,255,0.28)';
         p[k].style.color = act ? '#ffffff' : 'rgba(255,255,255,0.8)';
       }
     }
@@ -160,7 +160,7 @@
         <span style="display:flex;flex-direction:column;gap:8px;margin-top:22px;padding-top:20px;border-top:1px solid var(--linea);">
           <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gris);">Idioma</span>
           <span style="display:flex;gap:8px;">
-            <a href="contacto.html" style="display:flex;align-items:center;justify-content:center;flex:1;min-height:44px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;background:#2563eb;border:1px solid #2563eb;color:#ffffff;">Español</a>
+            <a href="contacto.html" style="display:flex;align-items:center;justify-content:center;flex:1;min-height:44px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;background:#02abda;border:1px solid #02abda;color:#ffffff;">Español</a>
             <a href="contacto-en.html" style="display:flex;align-items:center;justify-content:center;flex:1;min-height:44px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;background:transparent;border:1px solid var(--linea);color:var(--tinta);">English</a>
           </span>
         </span>
