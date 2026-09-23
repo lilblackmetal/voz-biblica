@@ -44,7 +44,14 @@
   a.liga { color:var(--azul); text-decoration:none; font-weight:600; }
   a.liga:hover { color:#2a2f3d; }
   <style>.vb-navlink{}
-    @media (max-width: 900px) { .vb-navlink { display: none; } }</style>
+    @media (max-width: 900px) { .vb-navlink { display: none; } }    /* Interruptor de tema: encendido = modo claro. */
+    .vb-switch { display:inline-flex; align-items:center; gap:10px; min-height:34px; padding:0; background:transparent; border:0; cursor:pointer; font-family:inherit; font-size:11.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:rgba(255,255,255,0.85); }
+    .vb-switch-pista { position:relative; width:42px; height:24px; border-radius:99px; background:rgba(255,255,255,0.22); transition:background 0.2s ease; flex:none; }
+    .vb-switch-bola { position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:99px; background:#ffffff; box-shadow:0 1px 3px rgba(0,0,0,0.35); transition:transform 0.2s ease; }
+    html:not(.vb-noche) .vb-switch-pista { background:#34c759; }
+    html:not(.vb-noche) .vb-switch-bola { transform:translateX(18px); }
+    .vb-switch:focus-visible { outline:2px solid #34c759; outline-offset:3px; border-radius:99px; }
+</style>
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
   .vb-navlink:hover, .vb-navlink:active { color: #fd3852 !important; }
@@ -259,8 +266,7 @@
             <a href="contacto.html" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.28);font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-decoration:none;">Español</a>
             <a href="contacto-en.html" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;background:#fd3852;border:1px solid #fd3852;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#ffffff;text-decoration:none;">English</a>
             <span style="flex-basis:100%;height:0;"></span>
-            <button type="button" data-vb-pie="dia" onclick="vbTema('dia')" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.28);color:rgba(255,255,255,0.8);">Light</button>
-            <button type="button" data-vb-pie="noche" onclick="vbTema('noche')" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.28);color:rgba(255,255,255,0.8);">Dark</button>
+            <button type="button" class="vb-switch" data-vb-alterna="1" role="switch" aria-label="Light mode"><span class="vb-switch-pista"><span class="vb-switch-bola"></span></span><span>Light mode</span></button>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:11px;min-width:0;">
