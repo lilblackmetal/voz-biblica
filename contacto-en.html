@@ -51,6 +51,56 @@
     html:not(.vb-noche) .vb-switch-pista { background:#34c759; }
     html:not(.vb-noche) .vb-switch-bola { transform:translateX(18px); }
     .vb-switch:focus-visible { outline:2px solid #34c759; outline-offset:3px; border-radius:99px; }
+    /* ── Animaciones del homepage ── */
+    @keyframes vbFoto { from { transform: scale(1); } to { transform: scale(1.08); } }
+    #inicio img { animation: vbFoto 22s ease-in-out infinite alternate; transform-origin: 70% 50%; }
+    @keyframes vbRevela { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    .vb-root section:not(#inicio) { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1); }
+    .vb-root section:not(#inicio).vb-visto { opacity: 1; transform: none; }
+    .vb-root section:not(#inicio) :is([style*="display:grid"],[style*="display: grid"]) > * { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .vb-root section:not(#inicio).vb-visto :is([style*="display:grid"],[style*="display: grid"]) > * { opacity: 1; transform: none; }
+    .vb-root section:not(#inicio).vb-visto :is([style*="display:grid"],[style*="display: grid"]) > *:nth-child(2) { transition-delay: 0.08s; }
+    .vb-root section:not(#inicio).vb-visto :is([style*="display:grid"],[style*="display: grid"]) > *:nth-child(3) { transition-delay: 0.16s; }
+    .vb-root section:not(#inicio).vb-visto :is([style*="display:grid"],[style*="display: grid"]) > *:nth-child(4) { transition-delay: 0.24s; }
+    .vb-root section:not(#inicio).vb-visto :is([style*="display:grid"],[style*="display: grid"]) > *:nth-child(5) { transition-delay: 0.32s; }
+    .vb-root section:not(#inicio).vb-visto :is([style*="display:grid"],[style*="display: grid"]) > *:nth-child(6) { transition-delay: 0.40s; }
+    @keyframes vbLate { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    .vb-root section:not(#inicio).vb-visto span:is([style*="width:32px"],[style*="width: 32px"])[style*="border-radius"] { animation: vbLate 2.6s ease-in-out 0.6s infinite; }
+    .vb-root a:is([style*="min-height:5"],[style*="min-height: 5"]), .vb-root a:is([style*="min-height:4"],[style*="min-height: 4"]) { transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.16s ease, border-color 0.16s ease, color 0.16s ease; }
+    .vb-root a:is([style*="min-height:5"],[style*="min-height: 5"]):hover, .vb-root a:is([style*="min-height:4"],[style*="min-height: 4"]):hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px rgba(0,0,0,0.45); }
+    @media (prefers-reduced-motion: reduce) {
+      #inicio img, .vb-root section:not(#inicio).vb-visto span:is([style*="width:32px"],[style*="width: 32px"]) { animation: none !important; }
+      .vb-root section:not(#inicio), .vb-root section:not(#inicio) :is([style*="display:grid"],[style*="display: grid"]) > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+    /* ── Animaciones continuas ── */
+    /* Luces suaves que flotan sobre la foto del inicio. */
+    @keyframes vbLuz { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(6%,-4%) scale(1.15); } 100% { transform: translate(0,0) scale(1); } }
+    #inicio > div::before { content: ''; position: absolute; inset: -20%; z-index: 1; pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, rgba(255,170,90,0.22), transparent 38%),
+                  radial-gradient(circle at 78% 62%, rgba(2,171,218,0.20), transparent 36%);
+      mix-blend-mode: screen; animation: vbLuz 14s ease-in-out infinite; }
+    /* Botones rojos: brillo que respira y un reflejo que los cruza. */
+    @keyframes vbRespira { 0%,100% { box-shadow: 0 0 0 0 rgba(253,56,82,0.0); } 50% { box-shadow: 0 0 0 7px rgba(253,56,82,0.18); } }
+    @keyframes vbReflejo { 0% { transform: translateX(-120%) skewX(-20deg); } 60%,100% { transform: translateX(260%) skewX(-20deg); } }
+    .vb-root a:is([style*="background:#fd3852"],[style*="background: rgb(253, 56, 82)"],[style*="background: #fd3852"]) {
+      position: relative; overflow: hidden; animation: vbRespira 2.8s ease-in-out infinite; }
+    .vb-root a:is([style*="background:#fd3852"],[style*="background: rgb(253, 56, 82)"],[style*="background: #fd3852"])::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      animation: vbReflejo 3.6s ease-in-out 1s infinite; }
+    /* Palomitas verdes: pequeño latido escalonado. */
+    @keyframes vbPaloma { 0%,80%,100% { transform: scale(1); } 88% { transform: scale(1.22); } }
+    .vb-root svg:has(path:is([stroke="#12854b"],[stroke="#18a35c"])) { transform-origin: center; animation: vbPaloma 4s ease-in-out infinite; }
+    .vb-root li:nth-child(2n) svg:has(path:is([stroke="#12854b"],[stroke="#18a35c"])) { animation-delay: 0.5s; }
+    .vb-root li:nth-child(3n) svg:has(path:is([stroke="#12854b"],[stroke="#18a35c"])) { animation-delay: 1s; }
+    @media (prefers-reduced-motion: reduce) {
+      #inicio > div::before, .vb-root a::after { display: none !important; }
+      .vb-root a, .vb-root div, .vb-root svg { animation: none !important; }
+    }
+
+    @keyframes vbLogoVivo { 0%,100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 rgba(2,171,218,0)); } 50% { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 6px 16px rgba(2,171,218,0.55)); } }
+    img[alt^="Voz Bíblica"] { animation: vbLogoVivo 3.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { img[alt^="Voz Bíblica"] { animation: none !important; } }
 </style>
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
@@ -263,6 +313,7 @@
           </a>
           <p style="font-size:14px;line-height:1.6;margin:0;max-width:30ch;color:rgba(255,255,255,0.66);">The Bible: a joy to hear, easy to learn, and powerful to live by.</p>
           <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span data-vb-idioma-lab="1" style="flex-basis:100%;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:2px;">Language</span>
             <a href="contacto.html" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.28);font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-decoration:none;">Español</a>
             <a href="contacto-en.html" style="display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:10px;background:#fd3852;border:1px solid #fd3852;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#ffffff;text-decoration:none;">English</a>
             <span style="flex-basis:100%;height:0;"></span>
@@ -308,5 +359,38 @@
       </div>
     </div>
   </footer>
+<script>
+    // Las secciones aparecen al llegar a ellas. Si el navegador no lo soporta,
+    // se muestran de una vez para que nunca quede nada oculto.
+    (function () {
+      function activar() {
+        var secs = document.querySelectorAll('.vb-root section:not(#inicio)');
+        if (!('IntersectionObserver' in window)) { secs.forEach(function (s) { s.classList.add('vb-visto'); }); return; }
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (!e.isIntersecting) return; var todas = [].slice.call(secs); var k = todas.indexOf(e.target); todas.slice(0, k + 1).forEach(function (s) { s.classList.add('vb-visto'); io.unobserve(s); }); });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        secs.forEach(function (s) { if (!s.classList.contains('vb-visto')) io.observe(s); });
+        // Si se salta de golpe hacia abajo, las secciones que ya quedaron arriba
+        // también se muestran: el observador solo avisa de las que cruzan la vista.
+        if (!window.__vbScroll) {
+          window.__vbScroll = 1;
+          var revisar = function () {
+            var h = window.innerHeight;
+            document.querySelectorAll('.vb-root section:not(#inicio):not(.vb-visto)').forEach(function (s) {
+              if (s.getBoundingClientRect().top < h * 0.9) s.classList.add('vb-visto');
+            });
+          };
+          window.addEventListener('scroll', revisar, { passive: true });
+          document.addEventListener('scroll', revisar, { passive: true, capture: true });
+          revisar();
+        }
+      }
+      if (!window.__vbRevela) {
+        window.__vbRevela = 1;
+        var n = 0, t = setInterval(function () { activar(); if (++n > 12) clearInterval(t); }, 400);
+        setTimeout(function () { document.querySelectorAll('.vb-root section').forEach(function (s) { s.classList.add('vb-visto'); }); }, 9000);
+      }
+    })();
+</script>
 </body>
 </html>
