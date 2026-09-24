@@ -10,33 +10,51 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>body{margin:0;background:#f6f8fc;color:#101728;font-family:'Figtree',system-ui,sans-serif;}a{color:#fd3852;}a:hover{color:#e42b44;}</style>
+<style id="vb-fondo-luces">
+  @keyframes vbLuzFija { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(5%,-3%) scale(1.12); } 100% { transform: translate(0,0) scale(1); } }
+  html{background:#ffffff;}
+  body{background:transparent !important;}
+  body::before { content: ''; position: fixed; inset: -20%; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 45% 40% at 28% 30%, rgba(255,170,90,0.34), transparent 70%),
+                radial-gradient(ellipse 45% 42% at 72% 68%, rgba(2,171,218,0.30), transparent 70%),
+                radial-gradient(ellipse 30% 28% at 60% 22%, rgba(253,56,82,0.12), transparent 70%);
+    animation: vbLuzFija 14s ease-in-out infinite; }
+  main{position:relative;z-index:1;}
+  @media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+</style>
+<style id="vb-logo-quieto">img[alt^="Voz B"],*:has(> img[alt^="Voz B"]),*:has(> * > img[alt^="Voz B"]),img[src*="logo"],.vb-logo,.vb-logo-app{animation:none !important;transform:none !important;filter:none !important;transition:none !important;}img[alt^="Voz B"]::before,img[alt^="Voz B"]::after,*:has(> img[alt^="Voz B"])::before,*:has(> img[alt^="Voz B"])::after{animation:none !important;content:none !important;}</style>
+<style id="vb-botones-hover">
+  /* Botones: sin animación propia y sin subir; al pasar el cursor solo crecen. */
+  a[style*="min-height"], button[style*="min-height"], .vb-unete, #vb-mentor-btn {
+    animation:none !important; transition:transform 0.18s ease !important; }
+  a[style*="min-height"]::after, .vb-unete::after, a[style*="min-height"]::before { animation:none !important; display:none !important; }
+  a[style*="min-height"]:hover, button[style*="min-height"]:hover, .vb-unete:hover, #vb-mentor-btn:hover {
+    transform:scale(1.05) !important; box-shadow:none !important; }
+</style>
 </head>
 <body>
 <main style="max-width:880px;margin:0 auto;padding:28px 20px 56px;box-sizing:border-box;">
-<a href="index-en.html" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#101728;font-size:14px;font-weight:600;"><img src="logo-app.png" alt="Voz Bíblica" style="width:150px;height:auto;display:block;"></a>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;"><a href="index-en.html" style="display:inline-flex;flex-direction:column;align-items:center;text-decoration:none;color:#101728;"><img src="logo-circulo.png" alt="Voz Bíblica" style="width:120px;height:120px;display:block;border-radius:50%;"><span style="display:block;margin-top:10px;font-size:20px;font-weight:800;letter-spacing:0.08em;color:#101728;">VOZ BÍBLICA</span></a></div>
 <div style="text-align:center;margin:34px 0 30px;">
-<div style="font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#fd3852;font-weight:700;margin-bottom:12px;">Subscription</div>
-<h1 style="font-size:clamp(32px,5.5vw,52px);line-height:1.08;letter-spacing:-0.02em;margin:0 0 14px;font-weight:800;">Join Voz Bíblica</h1>
-<p style="font-size:17px;line-height:1.55;margin:0 auto;max-width:48ch;color:#3a3f4d;">The whole Bible narrated and explained in today’s words, with your Christian Mentor at any hour.</p></div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;"><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:#fff;border:2px solid #f5b301;box-shadow:0 10px 30px -18px rgba(16,23,40,0.35);">
+<h1 style="font-size:clamp(32px,5.5vw,52px);line-height:1.08;letter-spacing:-0.02em;margin:0;font-weight:800;">Choose your path to success</h1>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;align-items:stretch;"><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:rgba(255,255,255,0.22);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:2px solid #f5b301;box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 18px 44px -22px rgba(16,23,40,0.30), 0 2px 8px -4px rgba(16,23,40,0.10);">
 
-<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#101728;">Man of God · One month</div>
+<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#101728;">Man of God · One month</div><div style="font-size:12px;font-weight:700;visibility:hidden;">·</div>
 
 <div style="font-size:44px;font-weight:800;letter-spacing:-0.02em;line-height:1;">$16</div>
 <div style="font-size:14.5px;line-height:1.5;color:#3a3f4d;">USD a month ($299 MXN). Cancel anytime.</div>
-<a href="https://buy.stripe.com/00w00k9RZ8wdgu216X6Na0y" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#101728;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">JOIN WITH CARD</a></div><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:#fff;border:2px solid #fd3852;box-shadow:0 10px 30px -18px rgba(16,23,40,0.35);">
+<div style="flex:1;display:flex;flex-direction:column;gap:9px;margin:6px 0 4px;padding-top:12px;border-top:1px solid rgba(16,23,40,0.10);"><div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">What’s included</div><div style="display:flex;flex-direction:column;gap:8px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>All 66 books: 1,189 chapters narrated and explained</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Your Christian Mentor, at any hour</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>To-do list and your Bible notes</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Always updating, at no extra cost</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>No ads. Cancel anytime</span></div></div><a href="https://buy.stripe.com/00w00k9RZ8wdgu216X6Na0y" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#101728;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">JOIN WITH CARD</a></div><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:rgba(255,255,255,0.22);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:2px solid #fd3852;box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 18px 44px -22px rgba(16,23,40,0.30), 0 2px 8px -4px rgba(16,23,40,0.10);">
 <span style="position:absolute;top:-12px;left:20px;padding:4px 10px;border-radius:99px;background:#fd3852;color:#fff;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Recommended</span>
 <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#101728;">Man of God · One year</div>
 <div style="font-size:12px;font-weight:700;color:#12854b;">Four months free</div>
 <div style="font-size:44px;font-weight:800;letter-spacing:-0.02em;line-height:1;">$131</div>
 <div style="font-size:14.5px;line-height:1.5;color:#3a3f4d;">USD a year ($2,399 MXN), about $11 a month.</div>
-<a href="https://buy.stripe.com/28E8wQc07fYF7Xw2b16Na0z" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#fd3852;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">JOIN WITH CARD</a></div></div>
-<div style="margin:30px 0 0;padding:24px 22px;border-radius:18px;background:#fff;border:1px solid rgba(16,23,40,0.08);">
-<div style="font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;margin-bottom:14px;">What’s included</div>
-<div style="display:flex;flex-direction:column;gap:10px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>All 66 books: 1,189 chapters narrated and explained</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Your Christian Mentor, at any hour</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Timer, to-do list and your Bible notes</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>No ads. Cancel anytime</span></div></div>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:26px;font-size:14px;">
-<a href="app.html?lang=en&pagado=1" style="font-weight:700;">I already paid, open the app</a><a href="index-en.html" style="color:#3a3f4d;">Back to home</a></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:9px;margin:6px 0 4px;padding-top:12px;border-top:1px solid rgba(16,23,40,0.10);"><div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">What’s included</div><div style="display:flex;flex-direction:column;gap:8px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>All 66 books: 1,189 chapters narrated and explained</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Your Christian Mentor, at any hour</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>To-do list and your Bible notes</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Always updating, at no extra cost</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>No ads. Cancel anytime</span></div></div><a href="https://buy.stripe.com/28E8wQc07fYF7Xw2b16Na0z" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#fd3852;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">JOIN WITH CARD</a></div></div>
+
+
 <p style="text-align:center;font-size:13px;color:#5a6480;margin:18px 0 0;">Secure payment with Stripe. Cards from any country.</p>
+<p class="vb-nota-mxn" style="text-align:center;font-size:13px;color:#5a6480;margin:28px 0 0;">*Prices shown in US dollars (USD). Your card is charged the equivalent in Mexican pesos (MXN).</p>
 </main>
 </body>
 </html>
