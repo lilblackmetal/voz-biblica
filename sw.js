@@ -3,7 +3,7 @@
 // la copia guardada como respaldo si no hay internet: así una versión nueva se
 // ve en la primera recarga. Sólo las imágenes van desde la copia guardada, que
 // es lo que hace que la app abra rápido.
-const CACHE = 'vozbiblica-v543';
+const CACHE = 'vozbiblica-v656';
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -24,7 +24,9 @@ self.addEventListener('fetch', e => {
   const esPagina = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
   const esCodigo = /\.(js|css|json)$/i.test(url.pathname);
 
-  const desdeRed = () => fetch(req).then(r => {
+  // no-cache: pregunta siempre al servidor si hay versión nueva (evita la
+  // caché de 10 minutos de GitHub Pages).
+  const desdeRed = (fresco) => fetch(req, fresco ? { cache: 'no-cache' } : undefined).then(r => {
     if (r && r.status === 200) {
       const copia = r.clone();
       caches.open(CACHE).then(c => c.put(req, copia)).catch(() => {});
@@ -34,7 +36,7 @@ self.addEventListener('fetch', e => {
 
   // Páginas y código: red primero, copia guardada solo si falla la red.
   if (esPagina || esCodigo) {
-    e.respondWith(desdeRed().catch(() => caches.match(req)));
+    e.respondWith(desdeRed(true).catch(() => caches.match(req)));
     return;
   }
 
