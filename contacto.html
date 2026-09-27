@@ -20,9 +20,9 @@
   textarea { min-height:130px; resize:vertical; line-height:1.55; }
   input:focus, textarea:focus, select:focus { outline:none; border-color:var(--azul); box-shadow:0 0 0 3px rgba(16,23,40,0.14); }
   .campo { margin-bottom:16px; }
-  button { width:100%; min-height:50px; padding:14px; font:inherit; font-size:15.5px; font-weight:700; color:#fff; background:#fd3852; border:none; border-radius:12px; cursor:pointer; }
-  button:hover { background:#e42b44; }
-  button:active { background:#cc2039; }
+  button { width:100%; min-height:50px; padding:14px; font:inherit; font-size:15.5px; font-weight:700; color:#fff; background:#ff5757; border:none; border-radius:12px; cursor:pointer; }
+  button:hover { background:#e84848; }
+  button:active { background:#d63e3e; }
   .directo { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:12px; }
   .via { display:flex; align-items:flex-start; gap:12px; padding:18px; border:1px solid var(--linea); border-radius:14px; text-decoration:none; color:inherit; }
   .via:hover { border-color:var(--tinta); }
@@ -80,11 +80,11 @@
                   radial-gradient(circle at 78% 62%, rgba(2,171,218,0.20), transparent 36%);
       mix-blend-mode: screen; animation: vbLuz 14s ease-in-out infinite; }
     /* Botones rojos: brillo que respira y un reflejo que los cruza. */
-    @keyframes vbRespira { 0%,100% { box-shadow: 0 0 0 0 rgba(253,56,82,0.0); } 50% { box-shadow: 0 0 0 7px rgba(253,56,82,0.18); } }
+    @keyframes vbRespira { 0%,100% { box-shadow: 0 0 0 0 rgba(255,87,87,0.0); } 50% { box-shadow: 0 0 0 7px rgba(255,87,87,0.18); } }
     @keyframes vbReflejo { 0% { transform: translateX(-120%) skewX(-20deg); } 60%,100% { transform: translateX(260%) skewX(-20deg); } }
-    .vb-root a:is([style*="background:#fd3852"],[style*="background: rgb(253, 56, 82)"],[style*="background: #fd3852"]) {
+    .vb-root a:is([style*="background:#ff5757"],[style*="background: rgb(253, 56, 82)"],[style*="background: #ff5757"]) {
       position: relative; overflow: hidden; animation: vbRespira 2.8s ease-in-out infinite; }
-    .vb-root a:is([style*="background:#fd3852"],[style*="background: rgb(253, 56, 82)"],[style*="background: #fd3852"])::after {
+    .vb-root a:is([style*="background:#ff5757"],[style*="background: rgb(253, 56, 82)"],[style*="background: #ff5757"])::after {
       content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
       animation: vbReflejo 3.6s ease-in-out 1s infinite; }
@@ -104,13 +104,13 @@
 </style>
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
-  .vb-navlink:hover, .vb-navlink:active { color: #fd3852 !important; }
+  .vb-navlink:hover, .vb-navlink:active { color: #ff5757 !important; }
   header nav a[href="app.html?lang=es#entrar"] { transition: background 0.14s ease, border-color 0.14s ease; }
-  header nav a[href="app.html?lang=es#entrar"]:hover { background: #e42b44 !important; border-color: #e42b44 !important; }
-  header nav a[href="app.html?lang=es#entrar"]:active { background: #cc2039 !important; border-color: #cc2039 !important; }
+  header nav a[href="app.html?lang=es#entrar"]:hover { background: #e84848 !important; border-color: #e84848 !important; }
+  header nav a[href="app.html?lang=es#entrar"]:active { background: #d63e3e !important; border-color: #d63e3e !important; }
   header nav a[href="app.html?lang=es#crear"] { transition: color 0.14s ease, border-color 0.14s ease; }
-  header nav a[href="app.html?lang=es#crear"]:hover { color: #fd3852 !important; border-color: #fd3852 !important; }
-  header nav a[href="app.html?lang=es#crear"]:active { background: #fd3852 !important; border-color: #fd3852 !important; color: #fff !important; }
+  header nav a[href="app.html?lang=es#crear"]:hover { color: #ff5757 !important; border-color: #ff5757 !important; }
+  header nav a[href="app.html?lang=es#crear"]:active { background: #ff5757 !important; border-color: #ff5757 !important; color: #fff !important; }
 </style>
 
 <style id="vb-menu-movil">
@@ -213,7 +213,7 @@
   html:not(.vb-noche) body::before { content: ''; position: fixed; inset: -20%; z-index: 0; pointer-events: none;
     background: radial-gradient(ellipse 45% 40% at 28% 30%, rgba(255,170,90,0.34), transparent 70%),
                 radial-gradient(ellipse 45% 42% at 72% 68%, rgba(2,171,218,0.30), transparent 70%),
-                radial-gradient(ellipse 30% 28% at 60% 22%, rgba(253,56,82,0.12), transparent 70%);
+                radial-gradient(ellipse 30% 28% at 60% 22%, rgba(255,87,87,0.12), transparent 70%);
     animation: vbLuzFija 14s ease-in-out infinite; }
   html:not(.vb-noche) body > *:not(script), html:not(.vb-noche) body { background: transparent !important; }
   html:not(.vb-noche) { background: #ffffff; }
@@ -241,10 +241,10 @@
       <a href="contenido.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Nuestro contenido</a>
       <a href="acerca.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Acerca de</a>
       <a href="index.html#precios" class="vb-navlink" style="font-size:14px;padding:8px 10px;color:#101728;text-decoration:none;">Precios</a>
-      <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#fd3852;text-decoration:none;">Contacto</a>
+      <a href="contacto.html" class="vb-navlink" style="font-size:14px;padding:8px 10px;font-weight:600;color:#ff5757;text-decoration:none;">Contacto</a>
       </nav>
     <div class="vb-head-btns" style="grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;">
-      <a href="app.html?lang=es#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#fd3852;border:1.5px solid #fd3852;border-radius:12px;color:#ffffff;text-decoration:none;">Iniciar sesión</a>
+      <a href="app.html?lang=es#entrar" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ff5757;border:1.5px solid #ff5757;border-radius:12px;color:#ffffff;text-decoration:none;">Iniciar sesión</a>
       <a href="app.html?lang=es#crear" style="font-size:14px;font-weight:600;padding:9px 18px;margin-left:6px;background:#ffffff;border:1px solid #cfd3dd;border-radius:12px;color:#101728;text-decoration:none;">Crear cuenta</a>
       <input type="checkbox" id="vbm-contacto" class="vb-chk">
       <label for="vbm-contacto" class="vb-burger" aria-label="Menú"><svg width="26" height="26" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg></label>
@@ -264,7 +264,7 @@
         </span>
         </span>
         <span style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
-        <a href="app.html?lang=es#entrar" style="display:flex;align-items:center;justify-content:center;min-height:52px;font-size:16px;font-weight:600;border-radius:12px;text-decoration:none;background:#fd3852;border:1.5px solid #fd3852;color:#ffffff;">Iniciar sesión</a>
+        <a href="app.html?lang=es#entrar" style="display:flex;align-items:center;justify-content:center;min-height:52px;font-size:16px;font-weight:600;border-radius:12px;text-decoration:none;background:#ff5757;border:1.5px solid #ff5757;color:#ffffff;">Iniciar sesión</a>
         <a href="app.html?lang=es#crear" style="display:flex;align-items:center;justify-content:center;min-height:52px;font-size:16px;font-weight:600;border-radius:12px;text-decoration:none;background:transparent;border:1px solid #cfd3dd;color:#101728;">Crear cuenta</a>
         </span>
       </div>
