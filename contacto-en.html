@@ -101,8 +101,10 @@
     @keyframes vbLogoVivo { 0%,100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 rgba(2,171,218,0)); } 50% { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 6px 16px rgba(2,171,218,0.55)); } }
     img[alt^="Voz Bíblica"] { animation: vbLogoVivo 3.6s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) { img[alt^="Voz Bíblica"] { animation: none !important; } }
-    ::selection { background: #fe2c55 !important; color: #ffffff !important; }
+    ::selection { background: #fd3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
     ::-moz-selection { background: #fe2c55 !important; color: #ffffff !important; }
+      /* Al seleccionar texto: rojo con letras blancas. */
+    ::selection { background: #fd3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
   </style>
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
