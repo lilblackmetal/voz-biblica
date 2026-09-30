@@ -3,7 +3,7 @@
 // la copia guardada como respaldo si no hay internet: así una versión nueva se
 // ve en la primera recarga. Sólo las imágenes van desde la copia guardada, que
 // es lo que hace que la app abra rápido.
-const CACHE = 'vozbiblica-v1164';
+const CACHE = 'vozbiblica-v1195';
 
 self.addEventListener('install', () => self.skipWaiting());
 
