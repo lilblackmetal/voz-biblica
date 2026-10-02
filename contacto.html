@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>
+(function(){try{
+  var K='vozbiblica:idioma', s=localStorage.getItem(K);
+  var q=new URLSearchParams(location.search).get('lang');
+  if(q==='es'||q==='en'){localStorage.setItem(K,q);s=q;}
+  document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';
+    if(/(^|\/)(index|suscripcion|acerca|contenido|contacto)-en\.html/.test(h)||/lang=en/.test(h))localStorage.setItem(K,'en');
+    else if(/(^|\/)(index|suscripcion|acerca|contenido|contacto)\.html/.test(h)||/lang=es/.test(h))localStorage.setItem(K,'es');},true);
+  if(s){ if(s!=='es') location.replace('contacto-en.html'+location.search+location.hash); return; }
+  if(/bot|crawl|spider|slurp|bingpreview|facebookexternalhit/i.test(navigator.userAgent))return;
+  var l=String((navigator.languages&&navigator.languages[0])||navigator.language||'es').toLowerCase();
+  var esp=l.indexOf('es')===0;
+  if(('es'==='es')!==esp) location.replace('contacto-en.html'+location.search+location.hash);
+}catch(e){}})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contacto — Voz Bíblica</title>
