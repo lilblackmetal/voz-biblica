@@ -116,10 +116,10 @@
     @keyframes vbLogoVivo { 0%,100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 rgba(2,171,218,0)); } 50% { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 6px 16px rgba(2,171,218,0.55)); } }
     img[alt^="Voz Bíblica"] { animation: vbLogoVivo 3.6s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) { img[alt^="Voz Bíblica"] { animation: none !important; } }
-    ::selection { background: #fd3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+    ::selection { background:#2563eb !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
     ::-moz-selection { background: #fe2c55 !important; color: #ffffff !important; }
       /* Al seleccionar texto: rojo con letras blancas. */
-    ::selection { background: #fd3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+    ::selection { background:#2563eb !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
   </style>
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
@@ -246,10 +246,10 @@
 <style id="vb-head-css">.vb-head-btns a{white-space:nowrap;} @media (max-width:1100px){.vb-head .vb-navlink{padding:8px 7px !important;font-size:13px !important;}}</style>
 <style id="vb-logo-quieto">img[alt^="Voz B"],*:has(> img[alt^="Voz B"]),*:has(> * > img[alt^="Voz B"]),img[src*="logo"],.vb-logo,.vb-logo-app{animation:none !important;transform:none !important;filter:none !important;transition:none !important;}img[alt^="Voz B"]::before,img[alt^="Voz B"]::after,*:has(> img[alt^="Voz B"])::before,*:has(> img[alt^="Voz B"])::after{animation:none !important;content:none !important;}</style>
   <meta name="theme-color" content="#000000">
-  <link rel="icon" href="favicon-v9.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="tab-32-v9.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="tab-192-v9.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-v9.png">
+  <link rel="icon" href="favicon-v9.ico?r=2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="tab-32-v9.png?r=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="tab-192-v9.png?r=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-v9.png?r=2">
   <link rel="manifest" href="manifest.json?v=9">
 <style id="vb-movil-contacto">
 @media (max-width: 900px) {
@@ -502,6 +502,15 @@
         setTimeout(function () { document.querySelectorAll('.vb-root section').forEach(function (s) { s.classList.add('vb-visto'); }); }, 9000);
       }
     })();
+</script>
+<script id="vb-con-cuenta">
+(function(){
+  function conCuenta(){ try { if (localStorage.getItem('vozbiblica:pagado')==='1') return true; for (var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if (k && k.indexOf('sb-')===0 && k.indexOf('auth-token')>0) return true; } } catch(e){} return false; }
+  if (!conCuenta()) return;
+  // Con cuenta, "Iniciar sesión" se vuelve "Voz Bíblica" y abre la app directo.
+  function cambiar(){ var n=0; document.querySelectorAll('a[href*="#entrar"]').forEach(function(a){ if (a.dataset.vbCuenta) return; a.dataset.vbCuenta='1'; a.textContent='Voz Bíblica'; a.setAttribute('href','app.html?lang=en'); n++; }); return n; }
+  var intentos=0; var t=setInterval(function(){ cambiar(); if (++intentos>40) clearInterval(t); }, 150);
+})();
 </script>
 </body>
 </html>
