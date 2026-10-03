@@ -116,10 +116,10 @@
     @keyframes vbLogoVivo { 0%,100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 rgba(2,171,218,0)); } 50% { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 6px 16px rgba(2,171,218,0.55)); } }
     img[alt^="Voz Bíblica"] { animation: vbLogoVivo 3.6s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) { img[alt^="Voz Bíblica"] { animation: none !important; } }
-    ::selection { background:#FD3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+    ::selection { background:#2563eb !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
     ::-moz-selection { background: #fe2c55 !important; color: #ffffff !important; }
       /* Al seleccionar texto: rojo con letras blancas. */
-    ::selection { background:#FD3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+    ::selection { background:#2563eb !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
   </style>
 <style id="vb-nav-estados">
   .vb-navlink { transition: color 0.14s ease; }
@@ -312,7 +312,7 @@
   html.vb-noche .vb-mmenu { background: #ffffff !important; }
   html.vb-noche .vb-mmenu a, html.vb-noche .vb-mmenu label, html.vb-noche .vb-mmenu button, html.vb-noche .vb-mmenu span, html.vb-noche .vb-mmenu svg { color: #000000 !important; }
   html.vb-noche .vb-mmenu a, html.vb-noche .vb-mmenu button { border-bottom-color: rgba(16,23,40,0.12) !important; }
-  html.vb-noche .vb-mmenu a[href*="#entrar"] { background:#FD3952 !important; border-color:#FD3952 !important; color: #ffffff !important; }
+  html.vb-noche .vb-mmenu a[href*="#entrar"] { background:#2563eb !important; border-color:#2563eb !important; color: #ffffff !important; }
 </style>
 <style id="vb-solo-es-claro">
   [data-vb-alterna], .vb-tema-btn, .vb-tema-menu, [data-vb-modo], .vb-switch, [data-vb-idioma-lab],
@@ -342,6 +342,25 @@
   html.vb-noche body footer a[href="mailto:contacto@vozbiblica.com"]:not([style*="inline-flex"]) {
     border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; }
 </style>
+<style id="vb-logo-pie-fijo">
+  /* El logo del pie no cambia de color al pasar el cursor. */
+  :root body footer a:has(> img), :root body footer a:has(> img):is(:hover,:active,:focus,:focus-visible) {
+    background: transparent !important; box-shadow: none !important; border-color: transparent !important; outline: none !important; transition: none !important; }
+  :root body footer a:has(> img) img, :root body footer a:has(> img):is(:hover,:active,:focus) img {
+    filter: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+</style>
+<style id="vb-sin-oscuro">
+  /* Sin modo oscuro: se esconden los botones de tema. */
+  :root .vb-head .vb-head-btns > .vb-tema-btn, :root :is(.vb-tema, .vb-tema-btn, .vb-tema-menu, [data-vb-modo], .vb-switch), :root footer :is([data-vb-modo], .vb-switch), :root .vb-mmenu :is(.vb-tema-btn, .vb-tema-menu, [data-vb-modo], .vb-switch) { display: none !important; }
+</style>
+<script id="vb-sin-oscuro-js">
+(function(){ var h=document.documentElement;
+  try { localStorage.setItem('vozbiblica:tema','dia'); } catch(e) {}
+  var quita=function(){ if (h.classList.contains('vb-noche')) h.classList.remove('vb-noche'); };
+  quita(); new MutationObserver(quita).observe(h,{attributes:true,attributeFilter:['class']});
+  window.vbTema=function(){};
+})();
+</script>
 </head>
 <body>
   <header class="vb-head" style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;max-width:none;margin:0 auto;padding:26px clamp(20px,5vw,72px) 12px;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif;">

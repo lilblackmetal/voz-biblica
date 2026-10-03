@@ -16,4 +16,23 @@
   html.vb-noche body footer a[href="mailto:contacto@vozbiblica.com"]:not([style*="inline-flex"]) {
     border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; }
 </style>
+<style id="vb-logo-pie-fijo">
+  /* El logo del pie no cambia de color al pasar el cursor. */
+  :root body footer a:has(> img), :root body footer a:has(> img):is(:hover,:active,:focus,:focus-visible) {
+    background: transparent !important; box-shadow: none !important; border-color: transparent !important; outline: none !important; transition: none !important; }
+  :root body footer a:has(> img) img, :root body footer a:has(> img):is(:hover,:active,:focus) img {
+    filter: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+</style>
+<style id="vb-sin-oscuro">
+  /* Sin modo oscuro: se esconden los botones de tema. */
+  :root .vb-head .vb-head-btns > .vb-tema-btn, :root :is(.vb-tema, .vb-tema-btn, .vb-tema-menu, [data-vb-modo], .vb-switch), :root footer :is([data-vb-modo], .vb-switch), :root .vb-mmenu :is(.vb-tema-btn, .vb-tema-menu, [data-vb-modo], .vb-switch) { display: none !important; }
+</style>
+<script id="vb-sin-oscuro-js">
+(function(){ var h=document.documentElement;
+  try { localStorage.setItem('vozbiblica:tema','dia'); } catch(e) {}
+  var quita=function(){ if (h.classList.contains('vb-noche')) h.classList.remove('vb-noche'); };
+  quita(); new MutationObserver(quita).observe(h,{attributes:true,attributeFilter:['class']});
+  window.vbTema=function(){};
+})();
+</script>
 </head><body><a href="contacto.html">Voz Bíblica</a></body></html>
