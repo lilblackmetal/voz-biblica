@@ -21,10 +21,10 @@
 <title>Únete a Voz Bíblica — Voz Bíblica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>body{margin:0;background:#f6f8fc;color:#101728;font-family:'Figtree',system-ui,sans-serif;}a{color:#000000;}a:hover{color:#1f2433;}    ::selection { background:#2563eb !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+<style>body{margin:0;background:#f6f8fc;color:#101728;font-family:'Figtree',system-ui,sans-serif;}a{color:#000000;}a:hover{color:#1f2433;}    ::selection { background:#FD3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
     ::-moz-selection { background: #fe2c55 !important; color: #ffffff !important; }
       /* Al seleccionar texto: rojo con letras blancas. */
-    ::selection { background:#2563eb !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+    ::selection { background:#FD3952 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
   </style>
 <style id="vb-fondo-luces">
   @keyframes vbLuzFija { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(5%,-3%) scale(1.12); } 100% { transform: translate(0,0) scale(1); } }
@@ -96,12 +96,28 @@
 </style>
 <script id="vb-solo-es-claro-js">
 (function(){try{
-  localStorage.setItem('vozbiblica:tema','claro'); localStorage.setItem('vozbiblica:idioma','es');
-  var h=document.documentElement; var quita=function(){ if(h.classList.contains('vb-noche')) h.classList.remove('vb-noche'); };
+  localStorage.setItem('vozbiblica:tema','oscuro'); localStorage.setItem('vozbiblica:idioma','es');
+  var h=document.documentElement; var quita=function(){ if(!h.classList.contains('vb-noche')) h.classList.add('vb-noche'); };
   quita(); new MutationObserver(quita).observe(h,{attributes:true,attributeFilter:['class']});
   window.vbTema=function(){};
 }catch(e){}})();
 </script>
+<style id="vb-paquetes-rojo">
+  a[href*="buy.stripe"], a.vb-unete { background:#FD3952 !important; border-color:#FD3952 !important; color:#ffffff !important; }
+  a[href*="buy.stripe"]:hover, a.vb-unete:hover { background:#e42b44 !important; border-color:#e42b44 !important; }
+  a[href*="buy.stripe"] *, a.vb-unete * { color:#ffffff !important; }
+</style>
+<style id="vb-pie-noche">
+  html.vb-noche body footer.vb-pie, html.vb-noche body footer.vb-pie :is(a,p,span,div,li,strong,b,button):not(.vb-switch-bola) { color: rgba(255,255,255,0.8) !important; }
+  html.vb-noche body footer.vb-pie :is(a,button):not(.vb-switch-bola):hover, html.vb-noche body footer.vb-pie :is(strong,b) { color: #ffffff !important; }
+</style>
+<style id="vb-palomitas">
+  /* Las palomitas aparecen con un pequeño rebote. Más específico que la regla general
+     que fija scale:none en las secciones, para que el rebote sí se vea. */
+  :root body svg.vb-palom, :root .vb-root section svg.vb-palom { opacity: 0 !important; scale: 0.2 !important; transition: opacity 0.5s ease, scale 0.7s cubic-bezier(.3,1.7,.5,1) !important; }
+  :root body svg.vb-palom.vb-visible, :root .vb-root section svg.vb-palom.vb-visible { opacity: 1 !important; scale: 1 !important; }
+  @media (prefers-reduced-motion: reduce) { :root body svg.vb-palom, :root .vb-root section svg.vb-palom { opacity: 1 !important; scale: 1 !important; transition: none !important; } }
+</style>
 </head>
 <body>
 <a class="vb-volver" href="index.html" aria-label="Volver al inicio" title="Volver al inicio"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path></svg></a>
@@ -112,7 +128,7 @@ b.addEventListener('click',function(){var n=!h.classList.contains('vb-noche');h.
 <main style="max-width:880px;margin:0 auto;padding:28px 20px 56px;box-sizing:border-box;">
 <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;"><a href="index.html" style="display:inline-flex;flex-direction:column;align-items:center;text-decoration:none;color:#101728;"><img src="logo-icono.png?r=2" alt="Voz Bíblica" width="120" height="120" style="display:block;width:120px;height:120px;border-radius:28px;"><span style="display:block;margin-top:10px;font-size:20px;font-weight:800;letter-spacing:0.08em;color:#101728;">VOZ BÍBLICA</span></a></div>
 <div style="text-align:center;margin:34px 0 30px;">
-<h1 style="text-transform:uppercase;font-size:clamp(26px,4.2vw,40px);line-height:1.08;letter-spacing:-0.02em;margin:0;font-weight:800;">Elige tu camino al éxito</h1>
+<h1 style="text-transform:uppercase;font-size:clamp(26px,4.2vw,40px);line-height:1.08;letter-spacing:-0.02em;margin:0;font-weight:800;">Elige tu camino a la sabiduría y el éxito</h1>
 </div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;align-items:stretch;"><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:transparent;border:2px solid #000000;box-shadow:0 18px 44px -22px rgba(16,23,40,0.30), 0 2px 8px -4px rgba(16,23,40,0.10);">
 
@@ -121,14 +137,14 @@ b.addEventListener('click',function(){var n=!h.classList.contains('vb-noche');h.
 <div style="font-size:44px;font-weight:800;letter-spacing:-0.02em;line-height:1;"><span style="color:#101728;font-weight:500;margin-right:0.3em;">-30%</span>$69<span style="font-size:0.42em;font-weight:600;letter-spacing:0.02em;margin-left:0.25em;vertical-align:0.9em;">MXN</span></div>
           <div style="font-size:13px;color:#565959;margin-top:-4px;">Precio de lista: <span style="font-family:var(--font-heading);font-size:clamp(26px,3.4vw,42px);font-weight:500;letter-spacing:-0.045em;color:#8a8f98;text-decoration:line-through;text-decoration-color:#8a8f98;text-decoration-thickness:2px;vertical-align:middle;">$99</span></div>
 <div style="font-size:14.5px;line-height:1.5;color:#3a3f4d;">pesos mexicanos (MXN) al mes. Cancelas cuando quieras.</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:9px;margin:6px 0 4px;padding-top:12px;border-top:1px solid rgba(16,23,40,0.10);"><div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">Lo que incluye</div><div style="display:flex;flex-direction:column;gap:8px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiobiblia: los 66 libros narrados y explicados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiocursos: más de 20 cursos bíblicos guiados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Descubrir: busca por lo que vives, oraciones, personajes y lugares</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Mi contenido: favoritos, guardados, clips, resaltados y notas</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Lista de tareas, temporizador y tu actividad diaria</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Escucha sin internet</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Sin anuncios</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Cancelas cuando quieras</span></div></div><a href="https://buy.stripe.com/8x2fZi1lt9Ah3Hg7vl6Na0D" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#2563eb;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">ÚNETE CON TARJETA</a></div><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:transparent;border:2px solid #000000;box-shadow:0 18px 44px -22px rgba(16,23,40,0.30), 0 2px 8px -4px rgba(16,23,40,0.10);">
+<div style="flex:1;display:flex;flex-direction:column;gap:9px;margin:6px 0 4px;padding-top:12px;border-top:1px solid rgba(16,23,40,0.10);"><div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">Lo que incluye</div><div style="display:flex;flex-direction:column;gap:8px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiobiblia: los 66 libros narrados y explicados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiocursos: más de 20 cursos bíblicos guiados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Descubrir: busca por lo que vives, oraciones, personajes y lugares</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Mi contenido: favoritos, guardados, clips, resaltados y notas</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Lista de tareas, temporizador y tu actividad diaria</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Escucha sin internet</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Sin anuncios</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Cancelas cuando quieras</span></div></div><a href="https://buy.stripe.com/8x2fZi1lt9Ah3Hg7vl6Na0D" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#FD3952;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">ÚNETE CON TARJETA</a></div><div style="position:relative;display:flex;flex-direction:column;gap:10px;padding:26px 22px;border-radius:18px;background:transparent;border:2px solid #000000;box-shadow:0 18px 44px -22px rgba(16,23,40,0.30), 0 2px 8px -4px rgba(16,23,40,0.10);">
 <span style="position:absolute;top:-12px;left:20px;padding:4px 10px;border-radius:99px;background:#000000;color:#fff;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Recomendado</span>
 <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#101728;">Avanzado · Un año</div>
 <div style="text-transform:uppercase;font-size:12px;font-weight:700;color:#101728;">Casi siete meses gratis</div>
 <div style="font-size:44px;font-weight:800;letter-spacing:-0.02em;line-height:1;"><span style="color:#101728;font-weight:500;margin-right:0.3em;">-50%</span>$299<span style="font-size:0.42em;font-weight:600;letter-spacing:0.02em;margin-left:0.25em;vertical-align:0.9em;">MXN</span></div>
           <div style="font-size:13px;color:#565959;margin-top:-4px;">Precio de lista: <span style="font-family:var(--font-heading);font-size:clamp(26px,3.4vw,42px);font-weight:500;letter-spacing:-0.045em;color:#8a8f98;text-decoration:line-through;text-decoration-color:#8a8f98;text-decoration-thickness:2px;vertical-align:middle;">$599</span></div>
 <div style="font-size:14.5px;line-height:1.5;color:#3a3f4d;">pesos mexicanos (MXN) al año, sale en $24.90 al mes.</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:9px;margin:6px 0 4px;padding-top:12px;border-top:1px solid rgba(16,23,40,0.10);"><div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">Lo que incluye</div><div style="display:flex;flex-direction:column;gap:8px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiobiblia: los 66 libros narrados y explicados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiocursos: más de 20 cursos bíblicos guiados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Descubrir: busca por lo que vives, oraciones, personajes y lugares</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Mi contenido: favoritos, guardados, clips, resaltados y notas</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Lista de tareas, temporizador y tu actividad diaria</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Escucha sin internet</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Sin anuncios</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Cancelas cuando quieras</span></div></div><a href="https://buy.stripe.com/8x214o2pxfYF7Xwg1R6Na0E" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#2563eb;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">ÚNETE CON TARJETA</a></div></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:9px;margin:6px 0 4px;padding-top:12px;border-top:1px solid rgba(16,23,40,0.10);"><div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">Lo que incluye</div><div style="display:flex;flex-direction:column;gap:8px;"><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiobiblia: los 66 libros narrados y explicados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Audiocursos: más de 20 cursos bíblicos guiados</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Descubrir: busca por lo que vives, oraciones, personajes y lugares</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Mi contenido: favoritos, guardados, clips, resaltados y notas</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Lista de tareas, temporizador y tu actividad diaria</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Escucha sin internet</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Sin anuncios</span><span style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;"><span style="color:#12854b;font-weight:800;">✓</span>Cancelas cuando quieras</span></div></div><a href="https://buy.stripe.com/8x214o2pxfYF7Xwg1R6Na0E" style="margin-top:6px;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:#FD3952;color:#fff;font-size:15px;font-weight:700;letter-spacing:0.02em;text-decoration:none;">ÚNETE CON TARJETA</a></div></div>
 
 
 <p style="text-align:center;font-size:13px;color:#5a6480;margin:18px 0 0;">Pago seguro con Stripe. Tarjetas de cualquier país.</p>
@@ -142,5 +158,23 @@ b.addEventListener('click',function(){var n=!h.classList.contains('vb-noche');h.
   var intentos=0; var t=setInterval(function(){ cambiar(); if (++intentos>40) clearInterval(t); }, 150);
 })();
 </script>
+<script id="vb-palomitas-js">(function(){
+// Palomitas: cada una aparece al entrar en pantalla, en cascada dentro de su lista.
+function marcarPalomitas(){
+  document.querySelectorAll('svg').forEach(function(s){
+    if (s.__vbPal) return;
+    var p = s.querySelector('path'); var d = p && p.getAttribute('d') || '';
+    if (d.indexOf('M216,72') !== 0 && d.indexOf('M229.66,77.66') !== 0) return;
+    s.__vbPal = true; s.classList.add('vb-palom');
+    var fila = s.parentElement, lista = fila && fila.parentElement;
+    var i = lista ? Array.prototype.indexOf.call(lista.children, fila) : 0;
+    s.style.transitionDelay = (Math.max(0, i) * 0.12).toFixed(2) + 's';
+  });
+}
+function mostrarPalomitas(){ marcarPalomitas(); var h = innerHeight * 0.92;
+  document.querySelectorAll('.vb-palom:not(.vb-visible)').forEach(function(s){ var r = s.getBoundingClientRect(); if (r.top < h && r.bottom > 0) s.classList.add('vb-visible'); }); }
+addEventListener('scroll', function(){ requestAnimationFrame(mostrarPalomitas); }, { passive: true });
+setInterval(mostrarPalomitas, 700); mostrarPalomitas();
+})();</script>
 </body>
 </html>

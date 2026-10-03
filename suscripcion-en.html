@@ -4,4 +4,29 @@
 <link rel="canonical" href="https://vozbiblica.com/suscripcion.html">
 <title>Voz Bíblica</title>
 <script>location.replace("suscripcion.html"+location.search);</script>
-</head><body><a href="suscripcion.html">Voz Bíblica</a></body></html>
+<style id="vb-palomitas">
+  /* Las palomitas aparecen con un pequeño rebote. Más específico que la regla general
+     que fija scale:none en las secciones, para que el rebote sí se vea. */
+  :root body svg.vb-palom, :root .vb-root section svg.vb-palom { opacity: 0 !important; scale: 0.2 !important; transition: opacity 0.5s ease, scale 0.7s cubic-bezier(.3,1.7,.5,1) !important; }
+  :root body svg.vb-palom.vb-visible, :root .vb-root section svg.vb-palom.vb-visible { opacity: 1 !important; scale: 1 !important; }
+  @media (prefers-reduced-motion: reduce) { :root body svg.vb-palom, :root .vb-root section svg.vb-palom { opacity: 1 !important; scale: 1 !important; transition: none !important; } }
+</style>
+</head><body><a href="suscripcion.html">Voz Bíblica</a><script id="vb-palomitas-js">(function(){
+// Palomitas: cada una aparece al entrar en pantalla, en cascada dentro de su lista.
+function marcarPalomitas(){
+  document.querySelectorAll('svg').forEach(function(s){
+    if (s.__vbPal) return;
+    var p = s.querySelector('path'); var d = p && p.getAttribute('d') || '';
+    if (d.indexOf('M216,72') !== 0 && d.indexOf('M229.66,77.66') !== 0) return;
+    s.__vbPal = true; s.classList.add('vb-palom');
+    var fila = s.parentElement, lista = fila && fila.parentElement;
+    var i = lista ? Array.prototype.indexOf.call(lista.children, fila) : 0;
+    s.style.transitionDelay = (Math.max(0, i) * 0.12).toFixed(2) + 's';
+  });
+}
+function mostrarPalomitas(){ marcarPalomitas(); var h = innerHeight * 0.92;
+  document.querySelectorAll('.vb-palom:not(.vb-visible)').forEach(function(s){ var r = s.getBoundingClientRect(); if (r.top < h && r.bottom > 0) s.classList.add('vb-visible'); }); }
+addEventListener('scroll', function(){ requestAnimationFrame(mostrarPalomitas); }, { passive: true });
+setInterval(mostrarPalomitas, 700); mostrarPalomitas();
+})();</script>
+</body></html>

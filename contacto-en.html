@@ -4,4 +4,16 @@
 <link rel="canonical" href="https://vozbiblica.com/contacto.html">
 <title>Voz Bíblica</title>
 <script>location.replace("contacto.html"+location.search);</script>
+<style id="vb-sin-hover-logo">
+  /* El logo no cambia al pasar el cursor. */
+  :root body a:has(> img[alt^="Voz B"]), :root body a:has(> img[alt^="Voz B"]):is(:hover,:active,:focus-visible),
+  :root body a:has(> img[alt^="Voz B"]) img, :root body a:has(> img[alt^="Voz B"]):hover img {
+    opacity: 1 !important; transform: none !important; scale: none !important; filter: none !important;
+    background: transparent !important; box-shadow: none !important; outline: none !important; transition: none !important; }
+  /* "Contacto" del pie es texto: sin cuadro. El botón con el correo sí conserva su borde. */
+  :root body footer a[href="mailto:contacto@vozbiblica.com"]:not([style*="inline-flex"]),
+  :root.vb-noche body footer a[href="mailto:contacto@vozbiblica.com"]:not([style*="inline-flex"]),
+  html.vb-noche body footer a[href="mailto:contacto@vozbiblica.com"]:not([style*="inline-flex"]) {
+    border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; }
+</style>
 </head><body><a href="contacto.html">Voz Bíblica</a></body></html>
