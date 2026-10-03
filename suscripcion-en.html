@@ -88,10 +88,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-v9.png?r=2">
   <link rel="manifest" href="manifest.json?v=9">
 <style id="vb-volver">
-  .vb-volver { position:fixed; top:16px; left:16px; z-index:50; display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:12px; border:0; background:#2563eb; color:#ffffff; text-decoration:none; transition:transform 0.15s ease, background 0.15s ease; }
-  .vb-volver:hover { background:#1d4ed8; transform:scale(1.05); }
+  .vb-volver { position:fixed; top:16px; left:16px; z-index:50; display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:12px; border:1px solid rgba(16,23,40,0.2); background:transparent; color:#101728; text-decoration:none; transition:transform 0.15s ease, background 0.15s ease; }
+  .vb-volver:hover { background:rgba(16,23,40,0.06); transform:scale(1.05); }
   .vb-volver:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
-  html.vb-noche .vb-volver { color:#ffffff !important; background:#2563eb !important; border:0 !important; }
+  html.vb-noche .vb-volver { color:#ffffff !important; background:transparent !important; border:1px solid rgba(255,255,255,0.6) !important; }
+  html.vb-noche .vb-volver:hover { background:rgba(255,255,255,0.08) !important; }
 </style>
 </head>
 <body>
