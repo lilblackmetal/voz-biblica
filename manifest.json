@@ -23,19 +23,19 @@
   ],
   "icons": [
     {
-      "src": "icon-192-v9.png?r=2",
+      "src": "tab-192-v10.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512-v9.png?r=2",
+      "src": "icon-512-v10.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512-v9.png?r=2",
+      "src": "icon-512-v10.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
