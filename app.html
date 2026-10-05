@@ -2,6 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <script id="vb-diagnostico">
+  (function(){
+    function caja(msg){ try{ var d=document.getElementById('vb-diag'); if(!d){ d=document.createElement('div'); d.id='vb-diag'; d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483647;background:#fff;color:#101728;border:2px solid #FD3952;border-radius:12px;padding:14px;font:14px/1.45 -apple-system,sans-serif;word-break:break-word;'; (document.body||document.documentElement).appendChild(d);} d.innerHTML='<b>Error al cargar. Toma captura y mándala:</b><br>'+msg+'<br><small>'+navigator.userAgent+' | DS:'+(typeof DecompressionStream)+'</small><br><button onclick="location.reload()" style="margin-top:10px;padding:10px 16px;border-radius:10px;border:0;background:#2563eb;color:#fff;font-weight:700">Recargar</button>'; }catch(e){} }
+    window.addEventListener('error',function(e){ caja(String(e.message||e)+' '+(e.filename||'')+':'+(e.lineno||'')); });
+    window.addEventListener('unhandledrejection',function(e){ caja('Promesa: '+String(e.reason&&(e.reason.stack||e.reason.message)||e.reason)); });
+    setTimeout(function(){ var t=document.getElementById('__bundler_thumbnail'); if(t && document.contains(t)) caja('La página no terminó de abrir en 12 segundos.'); },12000);
+  })();
+  </script>
+
   <title>Voz Bíblica — la Biblia en lenguaje sencillo</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
