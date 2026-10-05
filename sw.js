@@ -3,7 +3,7 @@
 // la copia guardada como respaldo si no hay internet: así una versión nueva se
 // ve en la primera recarga. Sólo las imágenes van desde la copia guardada, que
 // es lo que hace que la app abra rápido.
-const CACHE = 'vozbiblica-v1437';
+const CACHE = 'vozbiblica-v1439';
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -20,6 +20,8 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // El número de versión siempre directo del servidor, nunca de la copia.
+  if (/version\.txt$/.test(url.pathname)) return;
 
   const esPagina = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
   const esCodigo = /\.(js|css|json)$/i.test(url.pathname);
