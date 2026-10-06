@@ -42,20 +42,24 @@ Deno.serve(async (req) => {
     // guardándolo en Storage para siempre.
     if (typeof body.texto !== 'string') return json({ error: 'faltan datos', detalle: 'texto no es una cadena' }, 400);
 
-    // OpenAI TTS acepta 4096 caracteres. Si el texto se pasa, cortamos en el
-    // último punto para no terminar a media palabra.
-    let texto = body.texto.trim();
-    if (texto.length > 4000) {
-      const corte = texto.slice(0, 4000);
-      const punto = Math.max(corte.lastIndexOf('. '), corte.lastIndexOf('.\n'));
-      texto = punto > 2500 ? corte.slice(0, punto + 1) : corte;
-      console.warn('texto recortado para voz', body.libro, body.capitulo);
-    }
+    const texto = body.texto.trim();
     if (!libro || !cap || !texto) return json({ error: 'faltan datos' }, 400);
 
-    // AAC pesa como un tercio del MP3 con la misma voz, y lo abren todos los
-    // navegadores. Los .mp3 viejos siguen sirviendo.
-    const ruta = idioma + '/' + libro + '-' + cap + '.m4a';
+    // OpenAI TTS acepta 4096 caracteres por petición. La explicación larga se
+    // parte en trozos por oración, se narra cada uno y se pegan: MP3 se puede
+    // concatenar sin más.
+    const trozos: string[] = [];
+    {
+      const oraciones = texto.match(/[^.!?\n]+[.!?]*\s*/g) || [texto];
+      let actual = '';
+      for (const o of oraciones) {
+        if ((actual + o).length > 3800 && actual) { trozos.push(actual.trim()); actual = ''; }
+        actual += o;
+      }
+      if (actual.trim()) trozos.push(actual.trim());
+    }
+
+    const ruta = 'v2/' + idioma + '/' + libro + '-' + cap + '.mp3';
     const publica = SUPABASE_URL + '/storage/v1/object/public/' + BUCKET + '/' + ruta;
 
     try {
@@ -66,30 +70,35 @@ Deno.serve(async (req) => {
         ? 'Lee como un narrador de audiolibro: pausado, cálido y reverente. Español neutro latinoamericano.'
         : 'Read like an audiobook narrator: unhurried, warm and reverent.';
 
-      const tts = await fetch('https://api.openai.com/v1/audio/speech', {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + OPENAI_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'gpt-4o-mini-tts',
-          voice: 'onyx',
-          input: texto,
-          instructions: instruccion,
-          response_format: 'aac',
-        }),
-      });
-      if (!tts.ok) {
-        const detalle = await tts.text();
-        console.error('openai', tts.status, detalle);
-        return json({ error: 'voz', status: tts.status, detalle: detalle.slice(0, 300) }, 502);
+      const partes: Uint8Array[] = [];
+      for (const trozo of trozos) {
+        const tts = await fetch('https://api.openai.com/v1/audio/speech', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + OPENAI_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'gpt-4o-mini-tts',
+            voice: 'onyx',
+            input: trozo,
+            instructions: instruccion,
+            response_format: 'mp3',
+          }),
+        });
+        if (!tts.ok) {
+          const detalle = await tts.text();
+          console.error('openai', tts.status, detalle);
+          return json({ error: 'voz', status: tts.status, detalle: detalle.slice(0, 300) }, 502);
+        }
+        partes.push(new Uint8Array(await tts.arrayBuffer()));
       }
-
-      const mp3 = await tts.arrayBuffer();
+      const total = partes.reduce((n, p) => n + p.length, 0);
+      const mp3 = new Uint8Array(total);
+      { let off = 0; for (const p of partes) { mp3.set(p, off); off += p.length; } }
       const subida = await fetch(SUPABASE_URL + '/storage/v1/object/' + BUCKET + '/' + ruta, {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + SERVICE_KEY,
           apikey: SERVICE_KEY,
-          'Content-Type': 'audio/mp4',
+          'Content-Type': 'audio/mpeg',
           'x-upsert': 'true',
           'Cache-Control': 'public, max-age=31536000',
         },
@@ -121,7 +130,7 @@ Deno.serve(async (req) => {
 
     // Si alguien ya abrió este capítulo, servimos lo guardado: sale al instante
     // y no se vuelve a pagar la generación.
-    guardarEn = idioma + '/' + libro.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-' + cap + '.json';
+    guardarEn = 'v2/' + idioma + '/' + libro.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-' + cap + '.json';
     try {
       const previo = await fetch(SUPABASE_URL + '/storage/v1/object/public/' + BUCKET + '/' + guardarEn);
       if (previo.ok) return json(await previo.json());
@@ -131,21 +140,37 @@ Deno.serve(async (req) => {
       ? 'Write the narration ENTIRELY in Spanish — every word must be Spanish, with correct native grammar and spelling. Do not mix in any English words or phrases (no Spanglish).'
       : 'Write the narration ENTIRELY in English — every word must be English. Do not mix in any Spanish words or phrases.';
 
-    prompt = `You are producing a modern, thought-for-thought retelling of the Bible — the approach the NIV takes: faithful to the meaning of every verse, but in the natural, contemporary words a person actually speaks today. Never archaic, never stiff, never a loose paraphrase that drops content.
+    prompt = `You are the best Bible teacher alive: the one whose explanations make people say "I finally understand this, why did nobody ever tell me?" and then tell a friend about it the same day. You combine the faithfulness of a careful scholar, the memory of a historian who knows the ancient world, the warmth of a storyteller and the clarity of someone explaining to a friend over coffee. People pay for this because nothing you say is vague, nothing is filler, nothing is invented, and every chapter leaves them with at least three things they never knew.
 
-Retell ${libro} chapter ${cap} in ${nombre}. Work from the public-domain source text: the Reina Valera 1909 in Spanish, the King James Version in English.
+Your task: narrate AND explain ${libro} chapter ${cap} in ${nombre}, as a single spoken audio piece. Work from the public-domain source text: the Reina Valera 1909 in Spanish, the King James Version in English.
 
-How to write it:
-- Cover the WHOLE chapter in order, first verse to last. Every event, teaching, name and number that carries meaning. Do not skip sections, do not compress several verses into one vague line, and do not add anything the chapter does not say.
-- Plain, current vocabulary. Where the old text says "he que" or "aconteció", write it the way someone would say it now. Keep names of people and places exactly as they are.
-- Plain enough that a twelve-year-old understands it on first listen. If a word needs a dictionary, use a simpler one.
-- Short sentences. One idea each. Written to be HEARD, not read — a listener with no Bible in hand should follow it the first time.
-- Warm and reverent, never chatty and never preachy. No commentary of your own, no "in this chapter we see", no headings, no verse numbers.
-- Where a verse is famous, keep its shape recognizable so a listener who knows it still hears it.
-- Length follows the chapter, never a fixed target. Write one to three sentences for EVERY verse in order — a 25-verse chapter runs roughly 550-800 words, a 50-verse chapter roughly 1,100-1,600. If your draft is shorter than that, you have summarized instead of retold: go back and cover the verses you compressed.
-- Before you answer, check the last verse of the chapter and make sure your narration actually reaches it. A narration that stops early is a failure, even if what it covers reads well. ${reglaIdioma}
+Structure (no headings, no labels — it flows as one continuous narration):
 
-Also give the 3-6 words in your narration a reader might not know.
+1. OPENING (3-5 sentences). Set the scene so a listener with zero background is oriented: where we are in the story, who is on stage, what has just happened before this chapter, and why this chapter matters. If there is one surprising fact that unlocks the chapter, lead with it.
+
+2. THE CHAPTER, section by section. Move through the whole chapter in order, first verse to last. For each natural section (a scene, a speech, a group of related verses):
+   - First RETELL it faithfully in today's words — every event, teaching, name and number that carries meaning. Never skip verses, never compress several into one vague line, never add anything the text does not say. Where a verse is famous, keep its shape recognizable.
+   - Then EXPLAIN it, right there, before moving on, and go deep — this is what the listener is paying for:
+     · What the hard words and customs meant to the original hearers (a Hebrew or Greek idiom and what it literally says, a measure converted to today's units, a ritual, a place and what it looked like, a social rule and why it existed).
+     · The historical world behind the verse: who ruled, what daily life was like, what the first hearers would have felt, what a neighbor from another nation believed by contrast.
+     · What the passage actually means, and the detail most people miss — the one that makes a listener stop and rewind.
+     · Why the author put it HERE: how this section answers or sets up the one before and after it.
+     · One concrete image from ordinary life today when it helps. Be specific: name the thing, do not gesture at it.
+   - When the chapter connects to something elsewhere in the Bible (a promise fulfilled, a pattern repeated, a quote Jesus later uses, an echo in the Psalms or the Prophets), say so and explain the connection in two or three sentences, not one.
+   - Where the chapter touches a question real people ask (suffering, money, family, fear, forgiveness, work, death, faith), stop and answer that question honestly from the text.
+
+3. CLOSING (8-12 sentences). First, the chapter's one big idea in a single memorable sentence a listener can repeat to someone else. Then the three things worth remembering from this chapter, each in one line. Then what it asks of a person living today — concrete, honest, applicable this week, with one specific example of how it would look on a Tuesday. End with one sentence that makes them want to hear the next chapter, with warmth and reverence, never with a sermon or a moral lecture.
+
+Voice and rules:
+- Written to be HEARD. Short sentences. One idea each. A listener in a car with no Bible in hand follows it the first time.
+- Plain enough that a twelve-year-old understands every sentence; deep enough that a pastor learns something. Never archaic, never stiff, never chatty, never preachy.
+- Keep names of people and places exactly as the source text has them.
+- Stay strictly inside what the text and sound mainstream Christian scholarship support. If a point is debated, say "some understand this as…" rather than picking a side. No denominational arguments, no politics.
+- No commentary markers like "in this chapter we see", no verse numbers spoken aloud, no headings, no bullet points.
+- Length follows the chapter, and it is LONG: the explanation is about three times the retelling. A 25-verse chapter runs about 2,600-3,400 words (around 18-22 minutes spoken); a 50-verse chapter about 4,500-6,000. If your draft is shorter, you summarized or skipped explanation — go back and deepen every section. Depth, not padding: every added sentence must teach something.
+- Before you answer, check the last verse of the chapter and make sure the narration actually reaches it and then closes. Stopping early is a failure. ${reglaIdioma}
+
+Also give the 4-8 words in your narration a reader might not know.
 Respond with ONLY minified JSON, no markdown fence:
 {"text":"...","hardWords":["...","..."]}`;
 
@@ -403,7 +428,7 @@ Use it the way a priest uses what he remembers about someone: to make the advice
         model: MODELO,
         // Los capítulos completos necesitan espacio: con 3000 la respuesta se
         // cortaba y quedaban resúmenes a medias.
-        max_tokens: crudoDirecto ? 500 : (tipo === 'capitulo' ? 8000 : 3000),
+        max_tokens: crudoDirecto ? 500 : (tipo === 'capitulo' ? 24000 : 3000),
         ...(sistema ? { system: sistema } : {}),
         messages: mensajes || [{ role: 'user', content: prompt }],
       }),
