@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vista de computadora</title>
+<style>
+  html,body{margin:0;height:100%;background:#e9ebf0;overflow:hidden;}
+  #marco{position:absolute;top:0;left:0;width:1920px;transform-origin:0 0;border:0;background:#fff;}
+</style>
+<link rel="icon" href="favicon-v12.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="tab-32-v12.png">
+<link rel="icon" type="image/png" sizes="192x192" href="tab-192-v12.png">
+<link rel="apple-touch-icon" href="apple-touch-v12.png">
+<link rel="manifest" href="manifest.json?v=12">
+</head>
+<body>
+<iframe id="marco" src="index.html"></iframe>
+<script>
+  function ajustar(){
+    var f=document.getElementById('marco'), s=Math.min(1, window.innerWidth/1920);
+    f.style.transform='scale('+s+')';
+    f.style.height=(window.innerHeight/s)+'px';
+  }
+  window.addEventListener('resize',ajustar); ajustar();
+</script>
+</body>
+</html>
